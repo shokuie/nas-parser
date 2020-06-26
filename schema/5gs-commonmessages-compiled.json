@@ -1,0 +1,39 @@
+[
+  {
+    "name": "L3 message wrapper",
+    "mandatory": [
+      {
+        "type": "Extended protocol discriminator",
+        "length": 8,
+        "_type": "extendedProtocolDiscriminator"
+      },
+      {
+        "type": "Spare half octet",
+        "name": "Spare half octet",
+        "length": 4,
+        "_type": "spareHalfOctet"
+      },
+      {
+        "type": "Security header type",
+        "length": -1,
+        "_type": "securityHeaderType"
+      }
+    ],
+    "additionnal": [
+      {
+        "type": "Extended protocol discriminator",
+        "length": 8
+      },
+      {
+        "type": "Spare half octet",
+        "name": "Spare half octet",
+        "length": 4
+      },
+      {
+        "type": "Security header type",
+        "length": -1
+      }
+    ],
+    "_name": "l3MessageWrapper"
+  }
+]

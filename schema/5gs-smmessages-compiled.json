@@ -1,0 +1,214 @@
+[
+  {
+    "name": "UL NAS transport",
+    "mandatory": [
+      {
+        "type": "Spare half octet",
+        "length": 4,
+        "_type": "spareHalfOctet"
+      },
+      {
+        "type": "Payload container type",
+        "length": 4,
+        "_type": "payloadContainerType"
+      },
+      {
+        "type": "Payload container",
+        "nBitLength": 16,
+        "_type": "payloadContainer"
+      }
+    ],
+    "optional": {
+      "8": {
+        "type": "Request type",
+        "length": 4,
+        "_type": "requestType"
+      },
+      "12": {
+        "type": "PDU session identity 2",
+        "name": "PDU session ID",
+        "length": 8,
+        "_type": "pduSessionIdentity2"
+      },
+      "22": {
+        "type": "S-NSSAI",
+        "length": -1,
+        "_type": "snssai"
+      },
+      "24": {
+        "type": "Additional information",
+        "_type": "additionalInformation",
+        "nBitLength": 8
+      },
+      "25": {
+        "type": "DNN",
+        "length": -1,
+        "_type": "dnn"
+      },
+      "59": {
+        "type": "PDU session identity 2",
+        "name": "Old PDU session ID",
+        "length": 8,
+        "_type": "pduSessionIdentity2"
+      }
+    },
+    "_name": "ulNasTransport"
+  },
+  {
+    "name": "DL NAS transport",
+    "mandatory": [
+      {
+        "type": "Spare half octet",
+        "length": 4,
+        "_type": "spareHalfOctet"
+      },
+      {
+        "type": "Payload container type",
+        "length": 4,
+        "_type": "payloadContainerType"
+      },
+      {
+        "type": "Payload container",
+        "nBitLength": 16,
+        "_type": "payloadContainer"
+      }
+    ],
+    "optional": {
+      "12": {
+        "type": "PDU session identity 2",
+        "name": "PDU session ID",
+        "length": 8,
+        "_type": "pduSessionIdentity2"
+      },
+      "24": {
+        "type": "Additional information",
+        "_type": "additionalInformation",
+        "nBitLength": 8
+      },
+      "37": {
+        "type": "GPRS timer 3",
+        "name": "Back-off timer value",
+        "_type": "gprsTimer3",
+        "nBitLength": 8
+      },
+      "58": {
+        "type": "5GSM cause",
+        "length": 8,
+        "_type": "5gsmCause"
+      }
+    },
+    "_name": "dlNasTransport"
+  },
+  {
+    "name": "PDU session establishment request",
+    "mandatory": [
+      {
+        "type": "Integrity protection maximum data rate",
+        "length": 16,
+        "_type": "integrityProtectionMaximumDataRate"
+      }
+    ],
+    "optional": {
+      "9": {
+        "type": "PDU session type",
+        "length": 4,
+        "_type": "pduSessionType"
+      },
+      "28": {
+        "type": "5GSM capability",
+        "_type": "5gsmCapability",
+        "nBitLength": 8
+      },
+      "A": {
+        "type": "SSC mode",
+        "length": 4,
+        "_type": "sscMode"
+      }
+    },
+    "_name": "pduSessionEstablishmentRequest"
+  },
+  {
+    "name": "PDU session establishment accept",
+    "mandatory": [
+      {
+        "type": "SSC mode",
+        "length": 4,
+        "_type": "sscMode"
+      },
+      {
+        "type": "PDU session type",
+        "length": 4,
+        "_type": "pduSessionType"
+      },
+      {
+        "type": "Authorized QoS rules",
+        "name": "QoSRules",
+        "length": -1,
+        "_type": "authorizedQosRules"
+      },
+      {
+        "type": "Session-AMBR",
+        "_type": "sessionambr",
+        "nBitLength": 8
+      }
+    ],
+    "optional": {
+      "22": {
+        "type": "S-NSSAI",
+        "length": -1,
+        "_type": "snssai"
+      },
+      "25": {
+        "type": "DNN",
+        "length": -1,
+        "_type": "dnn"
+      },
+      "29": {
+        "type": "PDU address",
+        "_type": "pduAddress",
+        "nBitLength": 8
+      },
+      "58": {
+        "type": "5GSM cause",
+        "length": 8,
+        "_type": "5gsmCause"
+      },
+      "78": {
+        "type": "EAP message",
+        "_type": "eapMessage",
+        "nBitLength": 8
+      },
+      "79": {
+        "type": "QoS flow descriptions",
+        "name": "Authorized QoS flow descriptions",
+        "length": -1,
+        "_type": "qosFlowDescriptions"
+      }
+    },
+    "_name": "pduSessionEstablishmentAccept"
+  },
+  {
+    "name": "PDU session release command",
+    "mandatory": [
+      {
+        "type": "5GSM cause",
+        "length": 8,
+        "_type": "5gsmCause"
+      }
+    ],
+    "optional": {
+      "37": {
+        "type": "GPRS timer 3",
+        "name": "Back-off timer value",
+        "_type": "gprsTimer3",
+        "nBitLength": 8
+      },
+      "78": {
+        "type": "EAP message",
+        "_type": "eapMessage",
+        "nBitLength": 8
+      }
+    },
+    "_name": "pduSessionReleaseCommand"
+  }
+]

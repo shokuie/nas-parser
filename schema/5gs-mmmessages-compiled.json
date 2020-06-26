@@ -1,0 +1,488 @@
+[
+  {
+    "name": "Plain 5GS NAS message not security protected",
+    "mandatory": [
+      {
+        "type": "Message type",
+        "length": -1,
+        "_type": "messageType"
+      }
+    ],
+    "_name": "plain5gsNasMessageNotSecurityProtected"
+  },
+  {
+    "name": "Integrity protected with new 5G NAS security context",
+    "mandatory": [
+      {
+        "type": "Message authentication code",
+        "length": 32,
+        "_type": "messageAuthenticationCode"
+      },
+      {
+        "type": "Sequence number",
+        "name": "Sequence number",
+        "length": 8,
+        "_type": "sequenceNumber"
+      }
+    ],
+    "_name": "integrityProtectedWithNew5gNasSecurityContext"
+  },
+  {
+    "name": "Integrity protected and ciphered",
+    "mandatory": [
+      {
+        "type": "Message authentication code",
+        "length": 32,
+        "_type": "messageAuthenticationCode"
+      },
+      {
+        "type": "Sequence number",
+        "name": "Sequence number",
+        "length": 8,
+        "_type": "sequenceNumber"
+      }
+    ],
+    "_name": "integrityProtectedAndCiphered"
+  },
+  {
+    "name": "Integrity protected and ciphered with new 5G NAS security context",
+    "mandatory": [
+      {
+        "type": "Message authentication code",
+        "length": 32,
+        "_type": "messageAuthenticationCode"
+      },
+      {
+        "type": "Sequence number",
+        "name": "Sequence number",
+        "length": 8,
+        "_type": "sequenceNumber"
+      }
+    ],
+    "_name": "integrityProtectedAndCipheredWithNew5gNasSecurityContext"
+  },
+  {
+    "name": "Integrity protected",
+    "mandatory": [
+      {
+        "type": "Message authentication code",
+        "length": 32,
+        "_type": "messageAuthenticationCode"
+      },
+      {
+        "type": "Sequence number",
+        "name": "Sequence number",
+        "length": 8,
+        "_type": "sequenceNumber"
+      }
+    ],
+    "_name": "integrityProtected"
+  },
+  {
+    "name": "Registration request",
+    "code": 65,
+    "mandatory": [
+      {
+        "type": "NAS key set identifier",
+        "name": "ngKSI",
+        "length": 4,
+        "_type": "nasKeySetIdentifier"
+      },
+      {
+        "type": "5GS registration type",
+        "name": "5GS registration type",
+        "length": 4,
+        "_type": "5gsRegistrationType"
+      },
+      {
+        "type": "5GS mobile identity",
+        "nBitLength": 16,
+        "_type": "5gsMobileIdentity"
+      }
+    ],
+    "optional": {
+      "10": {
+        "type": "5GMM capability",
+        "_type": "5gmmCapability",
+        "nBitLength": 8
+      },
+      "18": {
+        "type": "UEs usage setting",
+        "_type": "uesUsageSetting",
+        "nBitLength": 8
+      },
+      "25": {
+        "type": "Allowed PDU session status",
+        "_type": "allowedPduSessionStatus",
+        "nBitLength": 8
+      },
+      "40": {
+        "type": "Uplink data status",
+        "_type": "uplinkDataStatus",
+        "nBitLength": 8
+      },
+      "50": {
+        "type": "PDU session status",
+        "_type": "pduSessionStatus",
+        "nBitLength": 8
+      },
+      "52": {
+        "type": "5GS tracking area identity",
+        "name": "Last visited registered TAI",
+        "length": 48,
+        "_type": "5gsTrackingAreaIdentity"
+      },
+      "53": {
+        "type": "5GS update type",
+        "_type": "5gsUpdateType",
+        "nBitLength": 8
+      },
+      "70": {
+        "type": "EPS NAS message container",
+        "length": -1,
+        "_type": "epsNasMessageContainer"
+      },
+      "71": {
+        "type": "NAS message container",
+        "nBitLength": 16,
+        "_type": "nasMessageContainer"
+      },
+      "77": {
+        "type": "5GS mobile identity",
+        "name": "Additional GUTI",
+        "nBitLength": 16,
+        "_type": "5gsMobileIdentity"
+      },
+      "C": {
+        "type": "NAS key set identifier",
+        "name": "Non-current native NAS key set identifier",
+        "length": 8,
+        "_type": "nasKeySetIdentifier"
+      },
+      "2E": {
+        "type": "UE security capability",
+        "_type": "ueSecurityCapability",
+        "nBitLength": 8
+      },
+      "2F": {
+        "type": "NSSAI",
+        "name": "Requested NSSAI",
+        "length": -1,
+        "_type": "nssai"
+      },
+      "B": {
+        "type": "MICO indication",
+        "length": 4,
+        "_type": "micoIndication"
+      },
+      "7B": {
+        "type": "Payload container Optional",
+        "nBitLength": 16,
+        "_type": "payloadContainerOptional"
+      }
+    },
+    "_name": "registrationRequest"
+  },
+  {
+    "name": "Authentication request",
+    "code": 86,
+    "mandatory": [
+      {
+        "type": "Spare half octet",
+        "length": 4,
+        "_type": "spareHalfOctet"
+      },
+      {
+        "name": "ngKSI",
+        "type": "NAS key set identifier",
+        "length": 4,
+        "_type": "nasKeySetIdentifier"
+      },
+      {
+        "type": "ABBA",
+        "nBitLength": 8,
+        "_type": "abba"
+      }
+    ],
+    "optional": {
+      "20": {
+        "type": "Authentication parameter AUTN",
+        "nBitLength": 8,
+        "_type": "authenticationParameterAutn"
+      },
+      "21": {
+        "type": "Authentication parameter RAND",
+        "length": 128,
+        "_type": "authenticationParameterRand"
+      },
+      "78": {
+        "type": "EAP message",
+        "_type": "eapMessage",
+        "nBitLength": 8
+      }
+    },
+    "_name": "authenticationRequest"
+  },
+  {
+    "name": "Authentication response",
+    "optional": {
+      "78": {
+        "type": "EAP message",
+        "_type": "eapMessage",
+        "nBitLength": 8
+      },
+      "2D": {
+        "type": "Authentication response parameter",
+        "length": -1,
+        "_type": "authenticationResponseParameter"
+      }
+    },
+    "_name": "authenticationResponse"
+  },
+  {
+    "name": "Security mode command",
+    "mandatory": [
+      {
+        "name": "Selected NAS security algorithms",
+        "type": "NAS security algorithms",
+        "length": 8,
+        "_type": "nasSecurityAlgorithms"
+      },
+      {
+        "name": "Spare half octet",
+        "type": "Spare half octet",
+        "length": 4,
+        "_type": "spareHalfOctet"
+      },
+      {
+        "name": "ngKSI",
+        "type": "NAS key set identifier",
+        "length": 4,
+        "_type": "nasKeySetIdentifier"
+      },
+      {
+        "name": "Replayed UE security capabilities",
+        "type": "UE security capability",
+        "_type": "ueSecurityCapability",
+        "nBitLength": 8
+      }
+    ],
+    "optional": {
+      "36": {
+        "type": "Additional 5G security information",
+        "_type": "additional5gSecurityInformation",
+        "nBitLength": 8
+      },
+      "38": {
+        "type": "ABBA",
+        "length": -1,
+        "_type": "abba"
+      },
+      "57": {
+        "type": "NAS security algorithms",
+        "name": "Selected EPS NAS security algorithms",
+        "length": 16,
+        "_type": "nasSecurityAlgorithms"
+      },
+      "78": {
+        "type": "EAP message",
+        "_type": "eapMessage",
+        "nBitLength": 8
+      },
+      "E": {
+        "type": "IMEISV request",
+        "length": 4,
+        "_type": "imeisvRequest"
+      }
+    },
+    "_name": "securityModeCommand"
+  },
+  {
+    "name": "Security mode complete",
+    "optional": {
+      "71": {
+        "type": "NAS message container",
+        "nBitLength": 16,
+        "_type": "nasMessageContainer"
+      },
+      "77": {
+        "type": "5GS mobile identity",
+        "name": "IMEISV",
+        "nBitLength": 16,
+        "_type": "5gsMobileIdentity"
+      }
+    },
+    "_name": "securityModeComplete"
+  },
+  {
+    "name": "Registration accept",
+    "mandatory": [
+      {
+        "type": "5GS registration result",
+        "length": 16,
+        "_type": "5gsRegistrationResult"
+      }
+    ],
+    "optional": {
+      "11": {
+        "type": "NSSAI",
+        "name": "Rejected NSSAI",
+        "length": -1,
+        "_type": "nssai"
+      },
+      "15": {
+        "type": "NSSAI",
+        "name": "Allowed NSSAI",
+        "length": -1,
+        "_type": "nssai"
+      },
+      "16": {
+        "type": "GPRS timer 2",
+        "name": "T3502 value",
+        "_type": "gprsTimer2",
+        "nBitLength": 8
+      },
+      "21": {
+        "type": "5GS network feature support",
+        "_type": "5gsNetworkFeatureSupport",
+        "nBitLength": 8
+      },
+      "26": {
+        "type": "PDU session reactivation result",
+        "_type": "pduSessionReactivationResult",
+        "nBitLength": 8
+      },
+      "27": {
+        "type": "Service area list",
+        "length": -1,
+        "_type": "serviceAreaList"
+      },
+      "31": {
+        "type": "NSSAI",
+        "name": "Configured NSSAI",
+        "length": -1,
+        "_type": "nssai"
+      },
+      "50": {
+        "type": "PDU session status",
+        "_type": "pduSessionStatus",
+        "nBitLength": 8
+      },
+      "54": {
+        "type": "5GS tracking area identity list",
+        "name": "TAI list",
+        "_type": "5gsTrackingAreaIdentityList",
+        "nBitLength": 8
+      },
+      "77": {
+        "type": "5GS mobile identity",
+        "name": "5G-GUTI",
+        "nBitLength": 16,
+        "_type": "5gsMobileIdentity"
+      },
+      "78": {
+        "type": "EAP message",
+        "_type": "eapMessage",
+        "nBitLength": 8
+      },
+      "5E": {
+        "type": "GPRS timer 3",
+        "name": "T3512 value",
+        "_type": "gprsTimer3",
+        "nBitLength": 8
+      },
+      "A": {
+        "type": "NSSAI inclusion mode",
+        "length": 4,
+        "_type": "nssaiInclusionMode"
+      }
+    },
+    "_name": "registrationAccept"
+  },
+  {
+    "name": "Deregistration request UE originating",
+    "mandatory": [
+      {
+        "type": "NAS key set identifier",
+        "length": 4,
+        "_type": "nasKeySetIdentifier"
+      },
+      {
+        "type": "deregistration type",
+        "length": 4,
+        "_type": "deregistrationType"
+      },
+      {
+        "type": "5GS mobile identity",
+        "nBitLength": 16,
+        "_type": "5gsMobileIdentity"
+      }
+    ],
+    "_name": "deregistrationRequestUeOriginating"
+  },
+  {
+    "name": "Service request",
+    "mandatory": [
+      {
+        "type": "Service type",
+        "length": 4,
+        "_type": "serviceType"
+      },
+      {
+        "type": "NAS key set identifier",
+        "length": 4,
+        "_type": "nasKeySetIdentifier"
+      },
+      {
+        "type": "5GS mobile identity",
+        "name": "5G-S-TMSI",
+        "nBitLength": 16,
+        "_type": "5gsMobileIdentity"
+      }
+    ],
+    "optional": {
+      "25": {
+        "type": "Allowed PDU session status",
+        "_type": "allowedPduSessionStatus",
+        "nBitLength": 8
+      },
+      "40": {
+        "type": "Uplink data status",
+        "_type": "uplinkDataStatus",
+        "nBitLength": 8
+      },
+      "50": {
+        "type": "PDU session status",
+        "_type": "pduSessionStatus",
+        "nBitLength": 8
+      },
+      "71": {
+        "type": "NAS message container",
+        "nBitLength": 16,
+        "_type": "nasMessageContainer"
+      }
+    },
+    "_name": "serviceRequest"
+  },
+  {
+    "name": "Service accept",
+    "optional": {
+      "26": {
+        "type": "PDU session reactivation result",
+        "_type": "pduSessionReactivationResult",
+        "nBitLength": 8
+      },
+      "50": {
+        "type": "PDU session status",
+        "_type": "pduSessionStatus",
+        "nBitLength": 8
+      },
+      "78": {
+        "type": "EAP message",
+        "_type": "eapMessage",
+        "nBitLength": 8
+      }
+    },
+    "_name": "serviceAccept"
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "name": "nas_parser",
+  "version": "1.0.0",
+  "description": "A serializer and deserializer for 5GS NAS messages",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "5GS",
+    "NAS",
+    "Parser"
+  ],
+  "author": "Mo. Shokuienia <shokuie@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^2.5.1",
+    "mocha": "^7.2.0"
+  },
+  "dependencies": {
+    "js0xn": "^0.2.1"
+  }
+}
