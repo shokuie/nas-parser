@@ -1,23 +1,21 @@
 {
   "name": "authenticationRequest",
-  "ie": {
-    "spareHalfOctet": {
-      "spare": 0
-    },
-    "nasKeySetIdentifier": {
-      "tsc": "nativeSecurityContextForKsiamf",
-      "nasKeySetIdentifierValue": 1
-    },
-    "abba": {
-      "abbaContent": "0x0000"
-    },
-    "authenticationParameterRand": {
-      "rand": "0x19f4f9238f9416bb64d0c10c3abb242d"
-    },
-    "authenticationParameterAutn": {
-      "sqnXorAk": "0xaa29499f6286",
-      "amf": "0xe282",
-      "mac": "0x215f57fd4f115f0b"
-    }
+  "spareHalfOctet": {
+    "spare": 0
+  },
+  "nasKeySetIdentifier": {
+    "tsc": "nativeSecurityContextForKsiamf",
+    "nasKeySetIdentifierValue": 1
+  },
+  "abba": {
+    "abbaContent": "0x0000"
+  },
+  "authenticationParameterRand": {
+    "rand": "0x19f4f9238f9416bb64d0c10c3abb242d"
+  },
+  "authenticationParameterAutn": {
+    "sqnXorAk": "0xaa29499f6286",
+    "amf": "0xe282",
+    "mac": "0x215f57fd4f115f0b"
   }
 }

@@ -2,4 +2,7 @@ node_modules
 .DS_Store
 .editorconfig
 .eslintrc.js
+.vscode
+server.js
+data
 

@@ -92,7 +92,9 @@ function decodeInfoElement(stream, ie) {
 
 function decode5gsMessage(stream, messageType) {
   const msg = mmMessages.find((elem) => elem.code === messageType);
-  const ieSet = {};
+  const ieSet = {
+    name: msg._name,
+  };
 
   msg.mandatory.forEach((manIe) => {
     const manIeDef = mmInfoElements.find((elem) => elem._name === manIe._type);
@@ -193,7 +195,7 @@ function encode5gsMessage(payload, msgDef) {
       throw new Error(`Unknown length for ${manIeDef._name}`);
     }
 
-    const encIe = encodeInfoElement(payload.ie[manIeDef._name], manIeDef);
+    const encIe = encodeInfoElement(payload[manIeDef._name], manIeDef);
 
     if (manIe.nBitLength) {
       stream.append(new BitStream(`uint:${manIe.nBitLength}=${Math.ceil(encIe.length() / 8)}`));
@@ -203,7 +205,7 @@ function encode5gsMessage(payload, msgDef) {
   });
 
   Object.keys(msgDef.optional).reduce((prev, optIeTag) => {
-    if (!Object.keys(payload.ie).find((payloadOptIe) => payloadOptIe === msgDef.optional[optIeTag]._type)) {
+    if (!Object.keys(payload).find((payloadOptIe) => payloadOptIe === msgDef.optional[optIeTag]._type)) {
       return;
     }
 
@@ -219,7 +221,7 @@ function encode5gsMessage(payload, msgDef) {
 
     // Encoding IEI
     stream.append(new BitStream(`byte=${parseInt(optIeTag, 16)}`));
-    const encIe = encodeInfoElement(payload.ie[msgDef.optional[optIeTag]._type], optIeDef);
+    const encIe = encodeInfoElement(payload[msgDef.optional[optIeTag]._type], optIeDef);
 
     if (msgDef.optional[optIeTag].nBitLength) {
       // Encoding LI
@@ -265,12 +267,3 @@ module.exports = Object.freeze({
   decode,
   encode,
 });
-
-/*const retVal = decode(Buffer.from('7e00417100760100f110000001014d436f77425159444b32567541794541632f6e65365131677161347a37736c41444a4a4946335a756e32754b6238436f66786678594d364f7852493d02e4aac5d9e703967363484d41432d534841a5e9f17ba35bd92038ebb46900a14ee8ddd6995bc4e56a99308451fe7979fec22e02f0f0', 'hex'));
-console.log(js0xn.stringify(retVal));
-// const retVal = decode(Buffer.from('7e0056010200002119f4f9238f9416bb64d0c10c3abb242d2010aa29499f6286e282215f57fd4f115f0b', 'hex')); // Authenticatiopn request
-const payload = require('./data/authenticationRequest.json');
-
-const retVal1 = encode(js0xn.decode(payload));
-console.log(js0xn.stringify(retVal1.buf));
-*/
