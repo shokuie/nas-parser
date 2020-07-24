@@ -259,7 +259,7 @@ function encode(payload) {
 
   stream.append(encode5gsMessage(payload, message));
 
-  return stream;
+  return stream.buf;
 }
 
 module.exports = Object.freeze({
