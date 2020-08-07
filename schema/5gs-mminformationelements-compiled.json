@@ -26,6 +26,25 @@
     "_name": "spareHalfOctet3"
   },
   {
+    "name": "Security header type",
+    "pdu": [
+      {
+        "name": "Security header type value",
+        "length": 4,
+        "enum": {
+          "0": "plainNasMessageNotSecurityProtected",
+          "1": "integrityProtected",
+          "2": "integrityProtectedAndCiphered",
+          "3": "integrityProtectedWithNew5gNasSecurityContext",
+          "4": "integrityProtectedAndCipheredWithNew5gNasSecurityContext",
+          "5": "integrityProtectedAndPartiallyCipheredNasMessage"
+        },
+        "_name": "securityHeaderTypeValue"
+      }
+    ],
+    "_name": "securityHeaderType"
+  },
+  {
     "name": "Message authentication code",
     "pdu": [
       {
@@ -487,292 +506,16 @@
     "name": "UE security capability",
     "pdu": [
       {
-        "name": "5G-EA0 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "5gea0Supported"
+        "@type": "BIN",
+        "name": "Encryption Algorithm",
+        "length": 8,
+        "_name": "encryptionAlgorithm"
       },
       {
-        "name": "128-5G-EA1 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "1285gea1Supported"
-      },
-      {
-        "name": "128-5G-EA2 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "1285gea2Supported"
-      },
-      {
-        "name": "128-5G-EA3 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "1285gea3Supported"
-      },
-      {
-        "name": "5G-EA4 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "5gea4Supported"
-      },
-      {
-        "name": "5G-EA5 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "5gea5Supported"
-      },
-      {
-        "name": "5G-EA6 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "5gea6Supported"
-      },
-      {
-        "name": "5G-EA7 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "5gea7Supported"
-      },
-      {
-        "name": "5G-IA0 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "5gia0Supported"
-      },
-      {
-        "name": "128-5G-IA1 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "1285gia1Supported"
-      },
-      {
-        "name": "128-5G-IA2 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "1285gia2Supported"
-      },
-      {
-        "name": "128-5G-IA3 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "1285gia3Supported"
-      },
-      {
-        "name": "5G-IA4 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "5gia4Supported"
-      },
-      {
-        "name": "5G-IA5 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "5gia5Supported"
-      },
-      {
-        "name": "5G-IA6 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "5gia6Supported"
-      },
-      {
-        "name": "5G-IA7 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "5gia7Supported"
-      },
-      {
-        "name": "EEA0 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "eea0Supported"
-      },
-      {
-        "name": "128-EEA1 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "128eea1Supported"
-      },
-      {
-        "name": "128-EEA2 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "128eea2Supported"
-      },
-      {
-        "name": "128-EEA3 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "128eea3Supported"
-      },
-      {
-        "name": "EEA4 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "eea4Supported"
-      },
-      {
-        "name": "EEA5 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "eea5Supported"
-      },
-      {
-        "name": "EEA6 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "eea6Supported"
-      },
-      {
-        "name": "EEA7 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "eea7Supported"
-      },
-      {
-        "name": "EIA0 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "eia0Supported"
-      },
-      {
-        "name": "128-EIA1 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "128eia1Supported"
-      },
-      {
-        "name": "128-EIA2 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "128eia2Supported"
-      },
-      {
-        "name": "128-EIA3 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "128eia3Supported"
-      },
-      {
-        "name": "EIA4 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "eia4Supported"
-      },
-      {
-        "name": "EIA5 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "eia5Supported"
-      },
-      {
-        "name": "EIA6 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "eia6Supported"
-      },
-      {
-        "name": "EIA7 supported",
-        "length": 1,
-        "enum": {
-          "0": "notSupported",
-          "1": "supported"
-        },
-        "_name": "eia7Supported"
+        "@type": "BIN",
+        "name": "Integrity Algorithm",
+        "length": 8,
+        "_name": "integrityAlgorithm"
       }
     ],
     "_name": "ueSecurityCapability"
@@ -934,7 +677,7 @@
         "name": "Type of integrity protection algorithm",
         "length": 4,
         "enum": {
-          "0": "5gia0NullIntegrityProtectionAlgorithm",
+          "0": "5gia0",
           "1": "1285gia1",
           "2": "1285gia2",
           "3": "1285gia3",
@@ -2111,5 +1854,233 @@
       }
     ],
     "_name": "gprsTimer2"
+  },
+  {
+    "name": "Payload container",
+    "@type": "MESSAGE",
+    "_name": "payloadContainer"
+  },
+  {
+    "name": "Request type",
+    "pdu": [
+      {
+        "name": "Request type value",
+        "length": 4,
+        "enum": {
+          "1": "initialRequest",
+          "2": "existingPduSession",
+          "3": "initialEmergencyRequest",
+          "4": "existingEmergencyPduSession",
+          "5": "reserved"
+        },
+        "_name": "requestTypeValue"
+      }
+    ],
+    "_name": "requestType"
+  },
+  {
+    "name": "PDU session identity 2",
+    "pdu": [
+      {
+        "name": "PDU session identity 2 value",
+        "length": 8,
+        "enum": {
+          "0": "noPduSessionIdentityAssigned",
+          "1": "pduSessionIdentityValue1",
+          "2": "pduSessionIdentityValue2",
+          "3": "pduSessionIdentityValue3",
+          "4": "pduSessionIdentityValue4",
+          "5": "pduSessionIdentityValue5",
+          "6": "pduSessionIdentityValue6",
+          "7": "pduSessionIdentityValue7",
+          "8": "pduSessionIdentityValue8",
+          "9": "pduSessionIdentityValue9",
+          "10": "pduSessionIdentityValue10",
+          "11": "pduSessionIdentityValue11",
+          "12": "pduSessionIdentityValue12",
+          "13": "pduSessionIdentityValue13",
+          "14": "pduSessionIdentityValue14",
+          "15": "pduSessionIdentityValue15"
+        },
+        "_name": "pduSessionIdentity2Value"
+      }
+    ],
+    "_name": "pduSessionIdentity2"
+  },
+  {
+    "name": "S-NSSAI",
+    "pdu": [
+      {
+        "@type": "CHOICE",
+        "name": "S-NSSAI",
+        "field": {
+          "name": "Length of S-NSSAI contents",
+          "length": 8,
+          "namedValue": {
+            "1": "SST",
+            "2": "SST and mapped HPLMN SST",
+            "4": "SST and SD",
+            "5": "SST, SD and mapped HPLMN SST",
+            "8": "SST, SD, mapped HPLMN SST and mapped HPLMN SD"
+          }
+        },
+        "pdus": [
+          {
+            "keys": [
+              1,
+              7
+            ],
+            "pdu": [
+              {
+                "@type": "BIN",
+                "name": "SST",
+                "length": 8
+              }
+            ]
+          },
+          {
+            "keys": [
+              2
+            ],
+            "pdu": [
+              {
+                "@type": "BIN",
+                "name": "SST",
+                "length": 8
+              },
+              {
+                "@type": "BIN",
+                "name": "mapped HPLMN SST",
+                "length": 8
+              }
+            ]
+          },
+          {
+            "keys": [
+              4
+            ],
+            "pdu": [
+              {
+                "@type": "BIN",
+                "name": "SST",
+                "length": 8
+              },
+              {
+                "@type": "BIN",
+                "name": "SD",
+                "length": 24
+              }
+            ]
+          },
+          {
+            "keys": [
+              5
+            ],
+            "pdu": [
+              {
+                "@type": "BIN",
+                "name": "SST",
+                "length": 8
+              },
+              {
+                "@type": "BIN",
+                "name": "SD",
+                "length": 24
+              },
+              {
+                "@type": "BIN",
+                "name": "mapped HPLMN SST",
+                "length": 8
+              }
+            ]
+          },
+          {
+            "keys": [
+              8
+            ],
+            "pdu": [
+              {
+                "@type": "BIN",
+                "name": "SST",
+                "length": 8
+              },
+              {
+                "@type": "BIN",
+                "name": "SD",
+                "length": 24
+              },
+              {
+                "@type": "BIN",
+                "name": "mapped HPLMN SST",
+                "length": 8
+              },
+              {
+                "@type": "BIN",
+                "name": "mapped HPLMN SD",
+                "length": 24
+              }
+            ]
+          }
+        ],
+        "_name": "snssai"
+      }
+    ],
+    "_name": "snssai"
+  },
+  {
+    "name": "Additional information",
+    "@type": "BIN",
+    "_name": "additionalInformation"
+  },
+  {
+    "name": "DNN",
+    "@type": "BIN",
+    "_name": "dnn"
+  },
+  {
+    "name": "5GSM cause",
+    "pdu": [
+      {
+        "name": "Cause value",
+        "length": 8,
+        "enum": {
+          "26": "insufficientResources",
+          "27": "missingOrUnknownDnn",
+          "28": "unknownPduSessionType",
+          "29": "userAuthenticationOrAuthorizationFailed",
+          "31": "requestRejected,Unspecified",
+          "34": "serviceOptionTemporarilyOutOfOrder",
+          "35": "ptiAlreadyInUse",
+          "36": "regularDeactivation",
+          "38": "outOfLadnServiceArea",
+          "39": "reactivationRequested",
+          "41": "pduSessionTypeIpv6OnlyAllowed",
+          "43": "invalidPduSessionIdentity",
+          "44": "semanticErrorsInPacketFilter",
+          "45": "syntacticalErrorInPacketFilters",
+          "47": "ptiMismatch",
+          "50": "pduSessionTypeIpv4OnlyAllowed",
+          "54": "pduSessionDoesNotExist",
+          "67": "insufficientResourcesForSpecificSliceAndDnn",
+          "68": "notSupportedSscMode",
+          "70": "missingOrUnknownDnnInASlice",
+          "73": "insufficientResourcesForSpecificSlice",
+          "81": "invalidPtiValue",
+          "82": "maximumDataRatePerUeForUserplaneIntegrityProtectionIsTooLow",
+          "83": "semanticErrorInTheQosOperation",
+          "84": "syntacticalErrorInTheQosOperation",
+          "95": "semanticallyIncorrectMessage",
+          "96": "invalidMandatoryInformation",
+          "97": "messageTypeNonexistentOrNotImplemented",
+          "98": "messageTypeNotCompatibleWithTheProtocolState",
+          "99": "informationElementNonexistentOrNotImplemented",
+          "100": "conditionalIeError",
+          "101": "messageNotCompatibleWithTheProtocolState",
+          "111": "protocolError,Unspecified"
+        },
+        "_name": "causeValue"
+      }
+    ],
+    "_name": "5gsmCause"
   }
 ]

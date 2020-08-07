@@ -2,15 +2,18 @@
 const js0xn = require('js0xn');
 const { BitStream } = require('./src/bitstream');
 
-const mmMessages = require('./schema/5gs-mmmessages-compiled.json');
-const mmInfoElements = require('./schema/5gs-mminformationelements-compiled.json');
-const smMessages = require('./schema/5gs-smmessages-compiled.json');
-const smInfoElements = require('./schema/5gs-sminformationelements-compiled.json');
+const _5GMM = '5gsMobilityManagementMessages';
+const _5GSM = '5gsSessionManagementMessages';
+const messages = {};
+const elements = {};
+
+messages[_5GMM] = require('./schema/5gs-mmmessages-compiled.json');
+elements[_5GMM] = require('./schema/5gs-mminformationelements-compiled.json');
+messages[_5GSM] = require('./schema/5gs-smmessages-compiled.json');
+elements[_5GSM] = require('./schema/5gs-sminformationelements-compiled.json');
 const cMessages = require('./schema/5gs-commonmessages-compiled.json');
 const cInfoElements = require('./schema/5gs-commoninformationelements-compiled.json');
 
-const _5GSM = 0x2E;
-const _5GMM = 0x7E;
 const PLAIN_5GS_NAS = 0;
 const INTEGRITY_PROTECTED = 1;
 const INTEGRITY_PROTECTED_CIPHERED = 2;
@@ -19,9 +22,10 @@ const CIPHERED_NEW_5G_NAS_CONTEXT = 4;
 
 const decoders = {
   INTEGER: (value) => value.readIntBE(0, value.length),
+  UINT: (value) => value.readUIntBE(0, value.length),
   NULL: () => true,
   ENUM: (value, ie) => {
-    const itemValue = value.readIntBE(0, value.length);
+    const itemValue = value.readUIntBE(0, value.length);
     const item = ie.enum[itemValue.toString()];
     return item || itemValue;
   },
@@ -29,6 +33,7 @@ const decoders = {
 
 const encoders = {
   INTEGER: (value, ie) => new BitStream(`int:${ie.length}=${value}`),
+  UINT: (value, ie) => new BitStream(`uint:${ie.length}=${value}`),
   NULL: () => true,
   ENUM: (value, ie) => {
     const choice = parseInt(Object.keys(ie.enum).find((key) => ie.enum[key] === value), 10);
@@ -60,7 +65,7 @@ function decodeInfoElement(stream, ie) {
   if (ie.length && ie.length !== -1) {
     len = ie.length;
   } else if (ie.nBitLength) {
-    len = decoders.INTEGER(stream.readBits(ie.nBitLength)) * 8;
+    len = decoders.UINT(stream.readBits(ie.nBitLength)) * 8;
   } else {
     len = -1;
   }
@@ -73,7 +78,7 @@ function decodeInfoElement(stream, ie) {
 
   if (ie['@type'] === 'CHOICE') {
     const ieSet = {};
-    const choice = value.readIntBE(0, value.length);
+    const choice = value.readUIntBE(0, value.length);
     const choiceElement = ie.elements.find((elem) => elem.tag === choice);
 
     if (!choiceElement) {
@@ -83,6 +88,8 @@ function decodeInfoElement(stream, ie) {
     ieSet[choiceElement._name] = decodeInfoElement(stream, choiceElement);
 
     return ieSet;
+  } else if (ie['@type'] === 'MESSAGE') {
+    return decode(value);
   }
 
   const decoder = decoders[ie.enum ? 'ENUM' : ie['@type']];
@@ -90,21 +97,26 @@ function decodeInfoElement(stream, ie) {
   return decoder ? decoder(value, ie) : value;
 }
 
-function decode5gsMessage(stream, messageType) {
-  const msg = mmMessages.find((elem) => elem.code === messageType);
+function decode5gsMessage(stream, messageName, type) {
+  const msg = messages[type].find((elem) => elem._name === messageName);
+
+  if (!msg) {
+    throw new Error(`'${messageName}' is not a known MM message`);
+  }
+
   const ieSet = {
-    name: msg._name,
+    messageName: msg._name,
   };
 
   msg.mandatory.forEach((manIe) => {
-    const manIeDef = mmInfoElements.find((elem) => elem._name === manIe._type);
+    const manIeDef = elements[type].find((elem) => elem._name === manIe._type);
 
     let len = 0;
 
     if (manIe.length && manIe.length !== -1) {
       len = manIe.length;
     } else if (manIe.nBitLength) {
-      len = decoders.INTEGER(stream.readBits(manIe.nBitLength)) * 8;
+      len = decoders.UINT(stream.readBits(manIe.nBitLength)) * 8;
     } else {
 //      throw new Error(`Unknwon length IE: ${manIe.type}`);
       len = -1;
@@ -117,15 +129,28 @@ function decode5gsMessage(stream, messageType) {
   let optIeTag;
 
   // eslint-disable-next-line no-cond-assign
-  while ((optIeTag = stream.readBits(8)).length) {
-    const optIe = msg.optional[decoders.INTEGER(optIeTag).toString(16).toUpperCase()];
-    const optIeDef = mmInfoElements.find((elem) => elem._name === optIe._type);
+  while ((optIeTag = stream.readBits(4)).length) {
+    //  while ((optIeTag = stream.readBits(8)).length) {
+    let tag = decoders.UINT(optIeTag);
+    let optIe = msg.optional[tag.toString(16).toUpperCase()];
+
+    if (!optIe) {
+      // eslint-disable-next-line no-bitwise
+      tag = (tag << 4) | decoders.UINT(stream.readBits(4));
+      optIe = msg.optional[tag.toString(16).toUpperCase()];
+    }
+
+    if (!optIe) {
+      throw new Error(`Unknwon IE received: ${tag.toString(16).toUpperCase()}`);
+    }
+
+    const optIeDef = elements[type].find((elem) => elem._name === optIe._type);
     let len = 0;
 
-    if (optIe.length) {
+    if (optIe.length && optIe.length !== -1) {
       len = optIe.length;
     } else if (optIe.nBitLength) {
-      len = decoders.INTEGER(stream.readBits(optIe.nBitLength)) * 8;
+      len = decoders.UINT(stream.readBits(optIe.nBitLength)) * 8;
     } else {
       throw new Error(`Unknown length attribute: ${optIe.type}`);
 //      len = decoders.INTEGER(stream.readBits(8)) * 8;
@@ -140,21 +165,62 @@ function decode5gsMessage(stream, messageType) {
 }
 
 function decode(buffer) {
-  const stream = new BitStream(buffer);
-  const extProtoDesc = stream.readBits(8)[0];
+  let stream;
 
-  if (extProtoDesc === _5GMM) {
-    stream.move(4);
-    const secHeader = stream.readBits(4)[0];
-
-    if (secHeader === PLAIN_5GS_NAS) {
-      const messageType = stream.readBits(8)[0];
-
-      return decode5gsMessage(stream, messageType);
-    }
-  } else if (extProtoDesc === _5GSM) {
-    throw new Error('5GSM messages not supported');
+  if (buffer instanceof Buffer) {
+    stream = new BitStream(buffer);
+  } else {
+    stream = buffer;
   }
+
+  const ieSet = {};
+
+  ieSet.extendedProtocolDiscriminator = decodeInfoElement(stream,
+    cInfoElements.find((elem) => elem._name === 'extendedProtocolDiscriminator'));
+
+  if (ieSet.extendedProtocolDiscriminator.extendedProtocolDiscriminatorValue === _5GMM) {
+    stream.move(4); // Bypass spare half octet
+
+    ieSet.securityHeaderType = decodeInfoElement(stream,
+      elements[_5GMM].find((elem) => elem._name === 'securityHeaderType'));
+
+    if (ieSet.securityHeaderType.securityHeaderTypeValue === 'plainNasMessageNotSecurityProtected') {
+      ieSet.messageName = decodeInfoElement(stream,
+        cInfoElements.find((elem) => elem._name === 'messageType'));
+
+      if (!ieSet.messageName) {
+        throw new Error('Unknown MM message');
+      }
+
+      return Object.assign(ieSet, decode5gsMessage(stream, ieSet.messageName.messageTypeValue, _5GMM));
+    }
+
+    ieSet.messageAuthenticationCode = decodeInfoElement(stream,
+      elements[_5GMM].find((elem) => elem._name === 'messageAuthenticationCode'));
+    ieSet.sequenceNumber = decodeInfoElement(stream,
+      elements[_5GMM].find((elem) => elem._name === 'sequenceNumber'));
+
+    return Object.assign(ieSet, decode(stream));
+  }
+
+  if (ieSet.extendedProtocolDiscriminator.extendedProtocolDiscriminatorValue === _5GSM) {
+    ieSet.pduSessionIdentity = decodeInfoElement(stream,
+      elements[_5GSM].find((elem) => elem._name === 'pduSessionIdentity'));
+
+    ieSet.procedureTransactionIdentity = decodeInfoElement(stream,
+      elements[_5GSM].find((elem) => elem._name === 'procedureTransactionIdentity'));
+
+    ieSet.messageName = decodeInfoElement(stream,
+      cInfoElements.find((elem) => elem._name === 'messageType'));
+
+    if (!ieSet.messageName) {
+      throw new Error('Unknown SM message');
+    }
+
+    return Object.assign(ieSet, decode5gsMessage(stream, ieSet.messageName.messageTypeValue, _5GSM));
+  }
+
+  throw new Error('Invalid extended protocol discriminator');
 }
 
 function encodeInfoElement(payload, ieDef) {
@@ -236,7 +302,7 @@ function encode5gsMessage(payload, msgDef) {
 }
 
 function encode(payload) {
-  const message = mmMessages.find((msg) => msg._name === payload.name);
+  const message = mmMessages.find((msg) => msg._name === payload.messageName);
 
   if (!message) {
     throw new Error('Uknown message type');
@@ -245,8 +311,8 @@ function encode(payload) {
   const messageType = _5GMM;
   const stream = new BitStream(`byte=${messageType}`); // EPD
 
-  if (payload.securityContext) {
-    throw new Error('Integrity protection not supported');
+  if (payload.securityHeaderType) {
+    stream.append(new BitStream(`byte=${payload.securityHeaderType & 0x0f}`));
   } else {
     stream.append(new BitStream(`byte=${PLAIN_5GS_NAS}`));
   }

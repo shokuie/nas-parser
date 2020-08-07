@@ -11,6 +11,34 @@
     "_name": "plain5gsNasMessageNotSecurityProtected"
   },
   {
+    "name": "Security Protected NAS",
+    "mandatory": [
+      {
+        "type": "Spare half octet",
+        "length": 4,
+        "_type": "spareHalfOctet"
+      },
+      {
+        "type": "Security header type",
+        "name": "Security header type",
+        "length": 4,
+        "_type": "securityHeaderType"
+      },
+      {
+        "type": "Message authentication code",
+        "length": 32,
+        "_type": "messageAuthenticationCode"
+      },
+      {
+        "type": "Sequence number",
+        "name": "Sequence number",
+        "length": 8,
+        "_type": "sequenceNumber"
+      }
+    ],
+    "_name": "securityProtectedNas"
+  },
+  {
     "name": "Integrity protected with new 5G NAS security context",
     "mandatory": [
       {
@@ -484,5 +512,105 @@
       }
     },
     "_name": "serviceAccept"
+  },
+  {
+    "name": "UL NAS transport",
+    "mandatory": [
+      {
+        "type": "Spare half octet",
+        "length": 4,
+        "_type": "spareHalfOctet"
+      },
+      {
+        "type": "Payload container type",
+        "length": 4,
+        "_type": "payloadContainerType"
+      },
+      {
+        "type": "Payload container",
+        "nBitLength": 16,
+        "_type": "payloadContainer"
+      }
+    ],
+    "optional": {
+      "8": {
+        "type": "Request type",
+        "length": 4,
+        "_type": "requestType"
+      },
+      "12": {
+        "type": "PDU session identity 2",
+        "name": "PDU session ID",
+        "length": 8,
+        "_type": "pduSessionIdentity2"
+      },
+      "22": {
+        "type": "S-NSSAI",
+        "length": -1,
+        "_type": "snssai"
+      },
+      "24": {
+        "type": "Additional information",
+        "_type": "additionalInformation",
+        "nBitLength": 8
+      },
+      "25": {
+        "type": "DNN",
+        "nBitLength": 8,
+        "_type": "dnn"
+      },
+      "59": {
+        "type": "PDU session identity 2",
+        "name": "Old PDU session ID",
+        "length": 8,
+        "_type": "pduSessionIdentity2"
+      }
+    },
+    "_name": "ulNasTransport"
+  },
+  {
+    "name": "DL NAS transport",
+    "mandatory": [
+      {
+        "type": "Spare half octet",
+        "length": 4,
+        "_type": "spareHalfOctet"
+      },
+      {
+        "type": "Payload container type",
+        "length": 4,
+        "_type": "payloadContainerType"
+      },
+      {
+        "type": "Payload container",
+        "nBitLength": 16,
+        "_type": "payloadContainer"
+      }
+    ],
+    "optional": {
+      "12": {
+        "type": "PDU session identity 2",
+        "name": "PDU session ID",
+        "length": 8,
+        "_type": "pduSessionIdentity2"
+      },
+      "24": {
+        "type": "Additional information",
+        "_type": "additionalInformation",
+        "nBitLength": 8
+      },
+      "37": {
+        "type": "GPRS timer 3",
+        "name": "Back-off timer value",
+        "_type": "gprsTimer3",
+        "nBitLength": 8
+      },
+      "58": {
+        "type": "5GSM cause",
+        "length": 8,
+        "_type": "5gsmCause"
+      }
+    },
+    "_name": "dlNasTransport"
   }
 ]
