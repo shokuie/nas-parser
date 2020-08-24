@@ -5,51 +5,60 @@
       {
         "type": "Spare half octet",
         "length": 4,
-        "_type": "spareHalfOctet"
+        "_type": "spareHalfOctet",
+        "_name": "spareHalfOctet"
       },
       {
         "type": "Payload container type",
         "length": 4,
-        "_type": "payloadContainerType"
+        "_type": "payloadContainerType",
+        "_name": "payloadContainerType"
       },
       {
         "type": "Payload container",
         "nBitLength": 16,
-        "_type": "payloadContainer"
+        "_type": "payloadContainer",
+        "_name": "payloadContainer"
       }
     ],
     "optional": {
       "8": {
         "type": "Request type",
         "length": 4,
-        "_type": "requestType"
+        "_type": "requestType",
+        "_name": "requestType"
       },
       "12": {
         "type": "PDU session identity 2",
         "name": "PDU session ID",
         "length": 8,
-        "_type": "pduSessionIdentity2"
+        "_type": "pduSessionIdentity2",
+        "_name": "pduSessionId"
       },
       "22": {
         "type": "S-NSSAI",
-        "length": -1,
-        "_type": "snssai"
+        "nBitLength": 16,
+        "_type": "snssai",
+        "_name": "snssai"
       },
       "24": {
         "type": "Additional information",
         "_type": "additionalInformation",
+        "_name": "additionalInformation",
         "nBitLength": 8
       },
       "25": {
         "type": "DNN",
-        "length": -1,
-        "_type": "dnn"
+        "nBitLength": 8,
+        "_type": "dnn",
+        "_name": "dnn"
       },
       "59": {
         "type": "PDU session identity 2",
         "name": "Old PDU session ID",
         "length": 8,
-        "_type": "pduSessionIdentity2"
+        "_type": "pduSessionIdentity2",
+        "_name": "oldPduSessionId"
       }
     },
     "_name": "ulNasTransport"
@@ -60,17 +69,20 @@
       {
         "type": "Spare half octet",
         "length": 4,
-        "_type": "spareHalfOctet"
+        "_type": "spareHalfOctet",
+        "_name": "spareHalfOctet"
       },
       {
         "type": "Payload container type",
         "length": 4,
-        "_type": "payloadContainerType"
+        "_type": "payloadContainerType",
+        "_name": "payloadContainerType"
       },
       {
         "type": "Payload container",
         "nBitLength": 16,
-        "_type": "payloadContainer"
+        "_type": "payloadContainer",
+        "_name": "payloadContainer"
       }
     ],
     "optional": {
@@ -78,23 +90,27 @@
         "type": "PDU session identity 2",
         "name": "PDU session ID",
         "length": 8,
-        "_type": "pduSessionIdentity2"
+        "_type": "pduSessionIdentity2",
+        "_name": "pduSessionId"
       },
       "24": {
         "type": "Additional information",
         "_type": "additionalInformation",
+        "_name": "additionalInformation",
         "nBitLength": 8
       },
       "37": {
         "type": "GPRS timer 3",
         "name": "Back-off timer value",
         "_type": "gprsTimer3",
+        "_name": "backoffTimerValue",
         "nBitLength": 8
       },
       "58": {
         "type": "5GSM cause",
         "length": 8,
-        "_type": "5gsmCause"
+        "_type": "5gsmCause",
+        "_name": "5gsmCause"
       }
     },
     "_name": "dlNasTransport"
@@ -105,24 +121,28 @@
       {
         "type": "Integrity protection maximum data rate",
         "length": 16,
-        "_type": "integrityProtectionMaximumDataRate"
+        "_type": "integrityProtectionMaximumDataRate",
+        "_name": "integrityProtectionMaximumDataRate"
       }
     ],
     "optional": {
       "9": {
         "type": "PDU session type",
         "length": 4,
-        "_type": "pduSessionType"
+        "_type": "pduSessionType",
+        "_name": "pduSessionType"
       },
       "28": {
         "type": "5GSM capability",
         "_type": "5gsmCapability",
+        "_name": "5gsmCapability",
         "nBitLength": 8
       },
       "A": {
         "type": "SSC mode",
         "length": 4,
-        "_type": "sscMode"
+        "_type": "sscMode",
+        "_name": "sscMode"
       }
     },
     "_name": "pduSessionEstablishmentRequest"
@@ -133,56 +153,66 @@
       {
         "type": "SSC mode",
         "length": 4,
-        "_type": "sscMode"
+        "_type": "sscMode",
+        "_name": "sscMode"
       },
       {
         "type": "PDU session type",
         "length": 4,
-        "_type": "pduSessionType"
+        "_type": "pduSessionType",
+        "_name": "pduSessionType"
       },
       {
-        "type": "Authorized QoS rules",
-        "name": "QoSRules",
-        "length": -1,
-        "_type": "authorizedQosRules"
+        "type": "QoS Rules",
+        "name": "Authorized QoS rules",
+        "nBitLength": 16,
+        "_type": "qosRules",
+        "_name": "authorizedQosRules"
       },
       {
         "type": "Session-AMBR",
         "_type": "sessionambr",
+        "_name": "sessionambr",
         "nBitLength": 8
       }
     ],
     "optional": {
       "22": {
         "type": "S-NSSAI",
-        "length": -1,
-        "_type": "snssai"
+        "nBitLength": 8,
+        "_type": "snssai",
+        "_name": "snssai"
       },
       "25": {
         "type": "DNN",
-        "length": -1,
-        "_type": "dnn"
+        "nBitLength": 8,
+        "_type": "dnn",
+        "_name": "dnn"
       },
       "29": {
         "type": "PDU address",
         "_type": "pduAddress",
+        "_name": "pduAddress",
         "nBitLength": 8
       },
       "58": {
         "type": "5GSM cause",
         "length": 8,
-        "_type": "5gsmCause"
+        "_type": "5gsmCause",
+        "_name": "5gsmCause"
       },
       "78": {
         "type": "EAP message",
         "_type": "eapMessage",
+        "_name": "eapMessage",
         "nBitLength": 8
       },
       "79": {
         "type": "QoS flow descriptions",
         "name": "Authorized QoS flow descriptions",
-        "length": -1,
-        "_type": "qosFlowDescriptions"
+        "nBitLength": 16,
+        "_type": "qosFlowDescriptions",
+        "_name": "authorizedQosFlowDescriptions"
       }
     },
     "_name": "pduSessionEstablishmentAccept"
@@ -193,7 +223,8 @@
       {
         "type": "5GSM cause",
         "length": 8,
-        "_type": "5gsmCause"
+        "_type": "5gsmCause",
+        "_name": "5gsmCause"
       }
     ],
     "optional": {
@@ -201,11 +232,13 @@
         "type": "GPRS timer 3",
         "name": "Back-off timer value",
         "_type": "gprsTimer3",
+        "_name": "backoffTimerValue",
         "nBitLength": 8
       },
       "78": {
         "type": "EAP message",
         "_type": "eapMessage",
+        "_name": "eapMessage",
         "nBitLength": 8
       }
     },

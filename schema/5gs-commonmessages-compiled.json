@@ -5,18 +5,21 @@
       {
         "type": "Extended protocol discriminator",
         "length": 8,
-        "_type": "extendedProtocolDiscriminator"
+        "_type": "extendedProtocolDiscriminator",
+        "_name": "extendedProtocolDiscriminator"
       },
       {
         "type": "Spare half octet",
         "name": "Spare half octet",
         "length": 4,
-        "_type": "spareHalfOctet"
+        "_type": "spareHalfOctet",
+        "_name": "spareHalfOctet"
       },
       {
         "type": "Security header type",
         "length": -1,
-        "_type": "securityHeaderType"
+        "_type": "securityHeaderType",
+        "_name": "securityHeaderType"
       }
     ],
     "additionnal": [

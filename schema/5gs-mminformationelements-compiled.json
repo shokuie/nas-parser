@@ -3,7 +3,7 @@
     "name": "Spare half octet",
     "pdu": [
       {
-        "@type": "SPARE",
+        "@type": "INTEGER",
         "name": "Spare",
         "length": 4,
         "value": 0,
@@ -16,7 +16,7 @@
     "name": "Spare half octet 3",
     "pdu": [
       {
-        "@type": "SPARE",
+        "@type": "INTEGER",
         "name": "Spare half octet 3",
         "length": 4,
         "value": 3,
@@ -2028,14 +2028,26 @@
     "_name": "snssai"
   },
   {
-    "name": "Additional information",
-    "@type": "BIN",
-    "_name": "additionalInformation"
+    "name": "DNN",
+    "pdu": [
+      {
+        "@type": "BIN",
+        "name": "DNN value",
+        "_name": "dnnValue"
+      }
+    ],
+    "_name": "dnn"
   },
   {
-    "name": "DNN",
-    "@type": "BIN",
-    "_name": "dnn"
+    "name": "Additional information",
+    "pdu": [
+      {
+        "@type": "BIN",
+        "name": "Additional information value",
+        "_name": "additionalInformationValue"
+      }
+    ],
+    "_name": "additionalInformation"
   },
   {
     "name": "5GSM cause",
