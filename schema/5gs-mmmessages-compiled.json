@@ -144,102 +144,117 @@
         "_name": "5gsMobileIdentity"
       }
     ],
-    "optional": {
-      "10": {
-        "type": "5GMM capability",
-        "_type": "5gmmCapability",
-        "_name": "5gmmCapability",
-        "nBitLength": 8
-      },
-      "18": {
-        "type": "UEs usage setting",
-        "_type": "uesUsageSetting",
-        "_name": "uesUsageSetting",
-        "nBitLength": 8
-      },
-      "25": {
-        "type": "Allowed PDU session status",
-        "_type": "allowedPduSessionStatus",
-        "_name": "allowedPduSessionStatus",
-        "nBitLength": 8
-      },
-      "40": {
-        "type": "Uplink data status",
-        "_type": "uplinkDataStatus",
-        "_name": "uplinkDataStatus",
-        "nBitLength": 8
-      },
-      "50": {
-        "type": "PDU session status",
-        "_type": "pduSessionStatus",
-        "_name": "pduSessionStatus",
-        "nBitLength": 8
-      },
-      "52": {
-        "type": "5GS tracking area identity",
-        "name": "Last visited registered TAI",
-        "length": 48,
-        "_type": "5gsTrackingAreaIdentity",
-        "_name": "lastVisitedRegisteredTai"
-      },
-      "53": {
-        "type": "5GS update type",
-        "_type": "5gsUpdateType",
-        "_name": "5gsUpdateType",
-        "nBitLength": 8
-      },
-      "70": {
-        "type": "EPS NAS message container",
-        "length": -1,
-        "_type": "epsNasMessageContainer",
-        "_name": "epsNasMessageContainer"
-      },
-      "71": {
-        "type": "NAS message container",
-        "nBitLength": 16,
-        "_type": "nasMessageContainer",
-        "_name": "nasMessageContainer"
-      },
-      "77": {
-        "type": "5GS mobile identity",
-        "name": "Additional GUTI",
-        "nBitLength": 16,
-        "_type": "5gsMobileIdentity",
-        "_name": "additionalGuti"
-      },
-      "C": {
+    "optional": [
+      {
+        "iei": 12,
         "type": "NAS key set identifier",
         "name": "Non-current native NAS key set identifier",
         "length": 8,
         "_type": "nasKeySetIdentifier",
         "_name": "noncurrentNativeNasKeySetIdentifier"
       },
-      "2E": {
+      {
+        "iei": 16,
+        "type": "5GMM capability",
+        "_type": "5gmmCapability",
+        "_name": "5gmmCapability",
+        "nBitLength": 8
+      },
+      {
+        "iei": 46,
         "type": "UE security capability",
         "_type": "ueSecurityCapability",
         "_name": "ueSecurityCapability",
         "nBitLength": 8
       },
-      "2F": {
+      {
+        "iei": 47,
         "type": "NSSAI",
         "name": "Requested NSSAI",
         "length": -1,
         "_type": "nssai",
         "_name": "requestedNssai"
       },
-      "B": {
+      {
+        "iei": 82,
+        "type": "5GS tracking area identity",
+        "name": "Last visited registered TAI",
+        "length": 48,
+        "_type": "5gsTrackingAreaIdentity",
+        "_name": "lastVisitedRegisteredTai"
+      },
+      {
+        "iei": 64,
+        "type": "Uplink data status",
+        "_type": "uplinkDataStatus",
+        "_name": "uplinkDataStatus",
+        "nBitLength": 8
+      },
+      {
+        "iei": 80,
+        "type": "PDU session status",
+        "_type": "pduSessionStatus",
+        "_name": "pduSessionStatus",
+        "nBitLength": 8
+      },
+      {
+        "iei": 11,
         "type": "MICO indication",
         "length": 4,
         "_type": "micoIndication",
         "_name": "micoIndication"
       },
-      "7B": {
+      {
+        "iei": 119,
+        "type": "5GS mobile identity",
+        "name": "Additional GUTI",
+        "nBitLength": 16,
+        "_type": "5gsMobileIdentity",
+        "_name": "additionalGuti"
+      },
+      {
+        "iei": 37,
+        "type": "Allowed PDU session status",
+        "_type": "allowedPduSessionStatus",
+        "_name": "allowedPduSessionStatus",
+        "nBitLength": 8
+      },
+      {
+        "iei": 24,
+        "type": "UEs usage setting",
+        "_type": "uesUsageSetting",
+        "_name": "uesUsageSetting",
+        "nBitLength": 8
+      },
+      {
+        "iei": 112,
+        "type": "EPS NAS message container",
+        "length": -1,
+        "_type": "epsNasMessageContainer",
+        "_name": "epsNasMessageContainer"
+      },
+      {
+        "iei": 123,
         "type": "Payload container Optional",
         "nBitLength": 16,
         "_type": "payloadContainerOptional",
         "_name": "payloadContainerOptional"
+      },
+      {
+        "iei": 83,
+        "type": "5GS update type",
+        "_type": "5gsUpdateType",
+        "_name": "5gsUpdateType",
+        "nBitLength": 8
+      },
+      {
+        "iei": 113,
+        "type": "NAS message container",
+        "nBitLength": 16,
+        "_type": "nasMessageContainer",
+        "_name": "nasMessageContainer"
       }
-    },
+    ],
     "_name": "registrationRequest"
   },
   {
@@ -266,44 +281,49 @@
         "_name": "abba"
       }
     ],
-    "optional": {
-      "20": {
-        "type": "Authentication parameter AUTN",
-        "nBitLength": 8,
-        "_type": "authenticationParameterAutn",
-        "_name": "authenticationParameterAutn"
-      },
-      "21": {
+    "optional": [
+      {
+        "iei": 33,
         "type": "Authentication parameter RAND",
         "length": 128,
         "_type": "authenticationParameterRand",
         "_name": "authenticationParameterRand"
       },
-      "78": {
+      {
+        "iei": 32,
+        "type": "Authentication parameter AUTN",
+        "nBitLength": 8,
+        "_type": "authenticationParameterAutn",
+        "_name": "authenticationParameterAutn"
+      },
+      {
+        "iei": 120,
         "type": "EAP message",
         "_type": "eapMessage",
         "_name": "eapMessage",
         "nBitLength": 8
       }
-    },
+    ],
     "_name": "authenticationRequest"
   },
   {
     "name": "Authentication response",
-    "optional": {
-      "78": {
-        "type": "EAP message",
-        "_type": "eapMessage",
-        "_name": "eapMessage",
-        "nBitLength": 8
-      },
-      "2D": {
+    "optional": [
+      {
+        "iei": 45,
         "type": "Authentication response parameter",
         "length": -1,
         "_type": "authenticationResponseParameter",
         "_name": "authenticationResponseParameter"
+      },
+      {
+        "iei": 120,
+        "type": "EAP message",
+        "_type": "eapMessage",
+        "_name": "eapMessage",
+        "nBitLength": 8
       }
-    },
+    ],
     "_name": "authenticationResponse"
   },
   {
@@ -338,58 +358,65 @@
         "nBitLength": 8
       }
     ],
-    "optional": {
-      "36": {
-        "type": "Additional 5G security information",
-        "_type": "additional5gSecurityInformation",
-        "_name": "additional5gSecurityInformation",
-        "nBitLength": 8
+    "optional": [
+      {
+        "iei": 14,
+        "type": "IMEISV request",
+        "length": 4,
+        "_type": "imeisvRequest",
+        "_name": "imeisvRequest"
       },
-      "38": {
-        "type": "ABBA",
-        "length": -1,
-        "_type": "abba",
-        "_name": "abba"
-      },
-      "57": {
+      {
+        "iei": 87,
         "type": "NAS security algorithms",
         "name": "Selected EPS NAS security algorithms",
         "length": 16,
         "_type": "nasSecurityAlgorithms",
         "_name": "selectedEpsNasSecurityAlgorithms"
       },
-      "78": {
+      {
+        "iei": 54,
+        "type": "Additional 5G security information",
+        "_type": "additional5gSecurityInformation",
+        "_name": "additional5gSecurityInformation",
+        "nBitLength": 8
+      },
+      {
+        "iei": 120,
         "type": "EAP message",
         "_type": "eapMessage",
         "_name": "eapMessage",
         "nBitLength": 8
       },
-      "E": {
-        "type": "IMEISV request",
-        "length": 4,
-        "_type": "imeisvRequest",
-        "_name": "imeisvRequest"
+      {
+        "iei": 56,
+        "type": "ABBA",
+        "length": -1,
+        "_type": "abba",
+        "_name": "abba"
       }
-    },
+    ],
     "_name": "securityModeCommand"
   },
   {
     "name": "Security mode complete",
-    "optional": {
-      "71": {
-        "type": "NAS message container",
-        "nBitLength": 16,
-        "_type": "nasMessageContainer",
-        "_name": "nasMessageContainer"
-      },
-      "77": {
+    "optional": [
+      {
+        "iei": 119,
         "type": "5GS mobile identity",
         "name": "IMEISV",
         "nBitLength": 16,
         "_type": "5gsMobileIdentity",
         "_name": "imeisv"
+      },
+      {
+        "iei": 113,
+        "type": "NAS message container",
+        "nBitLength": 16,
+        "_type": "nasMessageContainer",
+        "_name": "nasMessageContainer"
       }
-    },
+    ],
     "_name": "securityModeComplete"
   },
   {
@@ -402,93 +429,106 @@
         "_name": "5gsRegistrationResult"
       }
     ],
-    "optional": {
-      "11": {
-        "type": "NSSAI",
-        "name": "Rejected NSSAI",
-        "length": -1,
-        "_type": "nssai",
-        "_name": "rejectedNssai"
-      },
-      "15": {
-        "type": "NSSAI",
-        "name": "Allowed NSSAI",
-        "length": -1,
-        "_type": "nssai",
-        "_name": "allowedNssai"
-      },
-      "16": {
-        "type": "GPRS timer 2",
-        "name": "T3502 value",
-        "_type": "gprsTimer2",
-        "_name": "t3502Value",
-        "nBitLength": 8
-      },
-      "21": {
-        "type": "5GS network feature support",
-        "_type": "5gsNetworkFeatureSupport",
-        "_name": "5gsNetworkFeatureSupport",
-        "nBitLength": 8
-      },
-      "26": {
-        "type": "PDU session reactivation result",
-        "_type": "pduSessionReactivationResult",
-        "_name": "pduSessionReactivationResult",
-        "nBitLength": 8
-      },
-      "27": {
-        "type": "Service area list",
-        "length": -1,
-        "_type": "serviceAreaList",
-        "_name": "serviceAreaList"
-      },
-      "31": {
-        "type": "NSSAI",
-        "name": "Configured NSSAI",
-        "length": -1,
-        "_type": "nssai",
-        "_name": "configuredNssai"
-      },
-      "50": {
-        "type": "PDU session status",
-        "_type": "pduSessionStatus",
-        "_name": "pduSessionStatus",
-        "nBitLength": 8
-      },
-      "54": {
-        "type": "5GS tracking area identity list",
-        "name": "TAI list",
-        "_type": "5gsTrackingAreaIdentityList",
-        "_name": "taiList",
-        "nBitLength": 8
-      },
-      "77": {
+    "optional": [
+      {
+        "iei": 119,
         "type": "5GS mobile identity",
         "name": "5G-GUTI",
         "nBitLength": 16,
         "_type": "5gsMobileIdentity",
         "_name": "5gguti"
       },
-      "78": {
-        "type": "EAP message",
-        "_type": "eapMessage",
-        "_name": "eapMessage",
+      {
+        "iei": 84,
+        "type": "5GS tracking area identity list",
+        "name": "TAI list",
+        "_type": "5gsTrackingAreaIdentityList",
+        "_name": "taiList",
         "nBitLength": 8
       },
-      "5E": {
+      {
+        "iei": 21,
+        "type": "NSSAI",
+        "name": "Allowed NSSAI",
+        "length": -1,
+        "_type": "nssai",
+        "_name": "allowedNssai"
+      },
+      {
+        "iei": 17,
+        "type": "NSSAI",
+        "name": "Rejected NSSAI",
+        "length": -1,
+        "_type": "nssai",
+        "_name": "rejectedNssai"
+      },
+      {
+        "iei": 49,
+        "type": "NSSAI",
+        "name": "Configured NSSAI",
+        "length": -1,
+        "_type": "nssai",
+        "_name": "configuredNssai"
+      },
+      {
+        "iei": 33,
+        "type": "5GS network feature support",
+        "_type": "5gsNetworkFeatureSupport",
+        "_name": "5gsNetworkFeatureSupport",
+        "nBitLength": 8
+      },
+      {
+        "iei": 80,
+        "type": "PDU session status",
+        "_type": "pduSessionStatus",
+        "_name": "pduSessionStatus",
+        "nBitLength": 8
+      },
+      {
+        "iei": 38,
+        "type": "PDU session reactivation result",
+        "_type": "pduSessionReactivationResult",
+        "_name": "pduSessionReactivationResult",
+        "nBitLength": 8
+      },
+      {
+        "iei": 39,
+        "type": "Service area list",
+        "length": -1,
+        "_type": "serviceAreaList",
+        "_name": "serviceAreaList"
+      },
+      {
+        "iei": 94,
         "type": "GPRS timer 3",
         "name": "T3512 value",
         "_type": "gprsTimer3",
         "_name": "t3512Value",
         "nBitLength": 8
       },
-      "A": {
+      {
+        "iei": 22,
+        "type": "GPRS timer 2",
+        "name": "T3502 value",
+        "_type": "gprsTimer2",
+        "_name": "t3502Value",
+        "nBitLength": 8
+      },
+      {
+        "iei": 120,
+        "type": "EAP message",
+        "_type": "eapMessage",
+        "_name": "eapMessage",
+        "nBitLength": 8
+      },
+      {
+        "iei": 10,
         "type": "NSSAI inclusion mode",
         "length": 4,
         "_type": "nssaiInclusionMode",
         "_name": "nssaiInclusionMode"
       }
-    },
+    ],
     "_name": "registrationAccept"
   },
   {
@@ -538,56 +578,63 @@
         "_name": "5gstmsi"
       }
     ],
-    "optional": {
-      "25": {
-        "type": "Allowed PDU session status",
-        "_type": "allowedPduSessionStatus",
-        "_name": "allowedPduSessionStatus",
-        "nBitLength": 8
-      },
-      "40": {
+    "optional": [
+      {
+        "iei": 64,
         "type": "Uplink data status",
         "_type": "uplinkDataStatus",
         "_name": "uplinkDataStatus",
         "nBitLength": 8
       },
-      "50": {
+      {
+        "iei": 80,
         "type": "PDU session status",
         "_type": "pduSessionStatus",
         "_name": "pduSessionStatus",
         "nBitLength": 8
       },
-      "71": {
+      {
+        "iei": 37,
+        "type": "Allowed PDU session status",
+        "_type": "allowedPduSessionStatus",
+        "_name": "allowedPduSessionStatus",
+        "nBitLength": 8
+      },
+      {
+        "iei": 113,
         "type": "NAS message container",
         "nBitLength": 16,
         "_type": "nasMessageContainer",
         "_name": "nasMessageContainer"
       }
-    },
+    ],
     "_name": "serviceRequest"
   },
   {
     "name": "Service accept",
-    "optional": {
-      "26": {
-        "type": "PDU session reactivation result",
-        "_type": "pduSessionReactivationResult",
-        "_name": "pduSessionReactivationResult",
-        "nBitLength": 8
-      },
-      "50": {
+    "optional": [
+      {
+        "iei": 80,
         "type": "PDU session status",
         "_type": "pduSessionStatus",
         "_name": "pduSessionStatus",
         "nBitLength": 8
       },
-      "78": {
+      {
+        "iei": 38,
+        "type": "PDU session reactivation result",
+        "_type": "pduSessionReactivationResult",
+        "_name": "pduSessionReactivationResult",
+        "nBitLength": 8
+      },
+      {
+        "iei": 120,
         "type": "EAP message",
         "_type": "eapMessage",
         "_name": "eapMessage",
         "nBitLength": 8
       }
-    },
+    ],
     "_name": "serviceAccept"
   },
   {
@@ -612,46 +659,52 @@
         "_name": "payloadContainer"
       }
     ],
-    "optional": {
-      "8": {
-        "type": "Request type",
-        "length": 4,
-        "_type": "requestType",
-        "_name": "requestType"
-      },
-      "12": {
+    "optional": [
+      {
+        "iei": 18,
         "type": "PDU session identity 2",
         "name": "PDU session ID",
         "length": 8,
         "_type": "pduSessionIdentity2",
         "_name": "pduSessionId"
       },
-      "22": {
-        "type": "S-NSSAI",
-        "length": -1,
-        "_type": "snssai",
-        "_name": "snssai"
+      {
+        "iei": 8,
+        "type": "Request type",
+        "length": 4,
+        "_type": "requestType",
+        "_name": "requestType"
       },
-      "24": {
-        "type": "Additional information",
-        "_type": "additionalInformation",
-        "_name": "additionalInformation",
-        "nBitLength": 8
-      },
-      "25": {
-        "type": "DNN",
-        "nBitLength": 8,
-        "_type": "dnn",
-        "_name": "dnn"
-      },
-      "59": {
+      {
+        "iei": 89,
         "type": "PDU session identity 2",
         "name": "Old PDU session ID",
         "length": 8,
         "_type": "pduSessionIdentity2",
         "_name": "oldPduSessionId"
+      },
+      {
+        "iei": 34,
+        "type": "S-NSSAI",
+        "length": -1,
+        "_type": "snssai",
+        "_name": "snssai"
+      },
+      {
+        "iei": 37,
+        "type": "DNN",
+        "nBitLength": 8,
+        "_type": "dnn",
+        "_name": "dnn"
+      },
+      {
+        "iei": 36,
+        "type": "Additional information",
+        "_type": "additionalInformation",
+        "_name": "additionalInformation",
+        "nBitLength": 8
       }
-    },
+    ],
     "_name": "ulNasTransport"
   },
   {
@@ -676,34 +729,38 @@
         "_name": "payloadContainer"
       }
     ],
-    "optional": {
-      "12": {
+    "optional": [
+      {
+        "iei": 18,
         "type": "PDU session identity 2",
         "name": "PDU session ID",
         "length": 8,
         "_type": "pduSessionIdentity2",
         "_name": "pduSessionId"
       },
-      "24": {
+      {
+        "iei": 36,
         "type": "Additional information",
         "_type": "additionalInformation",
         "_name": "additionalInformation",
         "nBitLength": 8
       },
-      "37": {
+      {
+        "iei": 88,
+        "type": "5GSM cause",
+        "length": 8,
+        "_type": "5gsmCause",
+        "_name": "5gsmCause"
+      },
+      {
+        "iei": 55,
         "type": "GPRS timer 3",
         "name": "Back-off timer value",
         "_type": "gprsTimer3",
         "_name": "backoffTimerValue",
         "nBitLength": 8
-      },
-      "58": {
-        "type": "5GSM cause",
-        "length": 8,
-        "_type": "5gsmCause",
-        "_name": "5gsmCause"
       }
-    },
+    ],
     "_name": "dlNasTransport"
   }
 ]
