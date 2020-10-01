@@ -38,7 +38,7 @@ const encoders = {
 function decodeInfoElement(stream, ie) {
   if (ie['@type'] === 'IE') {
     const ieSet = {};
-    let ieId = decoders.UINT(stream.readBits(8));
+    const ieId = decoders.UINT(stream.readBits(ie.idLength || 8));
 
     if (!ieId) {
       throw new Error(`Unknown SM IE received: ${ie.name}`);
@@ -56,7 +56,7 @@ function decodeInfoElement(stream, ie) {
     }
 
     const ieStream = stream.slice(len);
-    ieSet[ieId.toString(16).toUpperCase()] = decodeInfoElement(ieStream, optIeDef);
+    ieSet[ieId.toString(10).toUpperCase()] = decodeInfoElement(ieStream, optIeDef);
 
     return ieSet;
   }
@@ -71,6 +71,19 @@ function decodeInfoElement(stream, ie) {
 
     multiIeSet.push(decodeInfoElement(stream, { pdu: ie.pdu }));
     itemCounter += 1;
+  }
+
+  if (ie['@type'] === 'LIST') {
+    const ieList = [];
+    const noListItems = decoders.UINT(stream.readBits(ie.numberLength));
+    let cnt = 0;
+
+    while (cnt < noListItems) {
+      cnt += 1;
+      ieList.push(decodeInfoElement(stream, { pdu: ie.pdu }));
+    }
+
+    return ieList;
   }
 
   if (ie.pdu) {
@@ -267,9 +280,47 @@ function decode(buffer) {
 }
 
 function encodeInfoElement(payload, ieDef) {
-  if (ieDef.pdu) {
-    const stream = new BitStream();
+  const stream = new BitStream();
 
+  if (ieDef['@type'] === 'IE') {
+    const elemIeDef = elements[_5GSM].find((elem) => elem._name === ieDef._name);
+
+    if (!elemIeDef) {
+      throw new Error(`Unknown IE: ${ieDef._name}`);
+    }
+
+    Object.keys(payload[ieDef._name]).reduce((prim, elem) => {
+    // Encoding IEI
+      stream.append(new BitStream(`uint:${ieDef.idLength || 8}=${parseInt(elem, 10)}`));
+
+      const encodedElem = encodeInfoElement(payload[ieDef._name][elem], elemIeDef);
+      // Encoding LI
+      stream.append(new BitStream(`uint:${ieDef.nBitLength}=${Math.ceil(encodedElem.length() / 8)}`));
+      stream.append(encodedElem);
+    }, 0);
+
+    return stream;
+  }
+
+  if (ieDef['@type'] === 'MULTI') {
+    payload.forEach((elem) => {
+      stream.append(encodeInfoElement(elem, { pdu: ieDef.pdu }));
+    });
+
+    return stream;
+  }
+
+  if (ieDef['@type'] === 'LIST') {
+    stream.append(new BitStream(`uint:${ieDef.numberLength}=${payload[ieDef._name].length}`));
+
+    payload[ieDef._name].forEach((elem) => {
+      stream.append(encodeInfoElement(elem, { pdu: ieDef.pdu }));
+    });
+
+    return stream;
+  }
+
+  if (ieDef.pdu) {
     try {
       ieDef.pdu.forEach((elem) => {
         stream.append(encodeInfoElement(payload, elem));
@@ -282,13 +333,30 @@ function encodeInfoElement(payload, ieDef) {
   }
 
   if (ieDef['@type'] === 'CHOICE') {
-    throw new Error('CHOICE Encoding not supported');
+    const choiceElement = Object.keys(payload)[0];
+    let choiceElementDef;
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const option in ieDef.elements) {
+      if (ieDef.elements[option]._name === choiceElement) {
+        choiceElementDef = ieDef.elements[option];
+        break;
+      }
+    }
+
+    if (!choiceElementDef) {
+      throw new Error('UNAVAILABLE CHOICE OPTION');
+    }
+
+    stream.append(new BitStream(`uint:${ieDef.length}=${choiceElementDef.tag}`));
+    stream.append(encodeInfoElement(payload[choiceElement], choiceElementDef));
+
+    return stream;
   }
 
   if (ieDef['@type'] === 'MESSAGE') {
     return _encode(payload);
   }
-
 
   const encoder = encoders[ieDef.enum ? 'ENUM' : ieDef['@type']];
 
@@ -309,7 +377,8 @@ function encode5gsMessage(payload, msgDef, type) {
       throw new Error(`Unknown length for ${manIeDef._name}`);
     }
 
-    const encIe = encodeInfoElement(payload[manIeDef._name], manIeDef);
+//    const encIe = encodeInfoElement(payload[manIeDef._name], manIeDef);
+    const encIe = encodeInfoElement(payload[manIe._name], manIeDef);
 
     if (manIe.nBitLength) {
       stream.append(new BitStream(`uint:${manIe.nBitLength}=${Math.ceil(encIe.length() / 8)}`));
@@ -337,7 +406,7 @@ function encode5gsMessage(payload, msgDef, type) {
     }
 
     // Encoding IEI
-    if (msgDef.optional[optIeTag].length < 8) {
+    if (msgDef.optional[optIeTag].length && msgDef.optional[optIeTag].length < 8) {
       stream.append(new BitStream(`uint:${msgDef.optional[optIeTag].length}=${parseInt(optIeTag, 16)}`));
     } else {
       stream.append(new BitStream(`byte=${parseInt(optIeTag, 16)}`));

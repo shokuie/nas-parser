@@ -3,7 +3,7 @@
     "name": "Spare half octet",
     "pdu": [
       {
-        "@type": "INTEGER",
+        "@type": "SPARE",
         "name": "Spare",
         "length": 4,
         "value": 0,
@@ -16,7 +16,7 @@
     "name": "Spare half octet 3",
     "pdu": [
       {
-        "@type": "INTEGER",
+        "@type": "SPARE",
         "name": "Spare half octet 3",
         "length": 4,
         "value": 3,

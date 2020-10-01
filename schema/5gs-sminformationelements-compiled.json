@@ -32,10 +32,10 @@
     "name": "Procedure transaction identity",
     "pdu": [
       {
-        "@type": "BIN",
-        "name": "Procedure transaction identity",
+        "@type": "INTEGER",
+        "name": "Procedure transaction identity value",
         "length": 8,
-        "_name": "procedureTransactionIdentity"
+        "_name": "procedureTransactionIdentityValue"
       }
     ],
     "_name": "procedureTransactionIdentity"
@@ -272,436 +272,320 @@
     "_name": "pduSessionType"
   },
   {
-    "name": "QoS rule",
+    "name": "Packet filter type1",
     "pdu": [
       {
-        "@type": "CHOICE",
-        "name": "Rule operation code",
-        "length": 3,
-        "elements": [
+        "name": "Packet filter component type",
+        "length": 8,
+        "enum": {
+          "1": "matchalltype",
+          "16": "ipv4remoteaddresstype",
+          "17": "ipv4localaddresstype",
+          "33": "ipv6remoteaddressprefixlengthtype",
+          "35": "ipv6localaddressprefixlengthtype",
+          "48": "protocolidentifiernextheadertype",
+          "64": "singlelocalporttype",
+          "65": "localportrangetype",
+          "80": "singleremoteporttype",
+          "81": "remoteportrangetype",
+          "96": "securityparameterindextype",
+          "112": "typeofservicetrafficclasstype",
+          "128": "flowlabeltype",
+          "129": "destinationmacaddresstype",
+          "130": "sourcemacaddresstype",
+          "131": "802.1qctagvidtype",
+          "132": "802.1qstagvidtype",
+          "133": "802.1qctagpcpdeitype",
+          "134": "802.1qstagpcpdeitype",
+          "135": "ethertypetype"
+        },
+        "_name": "packetFilterComponentType"
+      },
+      {
+        "@type": "BIN",
+        "name": "Packet filter content",
+        "length": -1,
+        "_name": "packetFilterContent"
+      }
+    ],
+    "_name": "packetFilterType1"
+  },
+  {
+    "name": "QoS Rule",
+    "@type": "CHOICE",
+    "length": 3,
+    "elements": [
+      {
+        "name": "Create new QoS rule",
+        "tag": 1,
+        "pdu": [
           {
-            "name": "Create new QoS rule",
-            "tag": 1,
+            "name": "DQR bit",
+            "length": 1,
+            "enum": {
+              "0": "theQosRuleIsNotTheDefaultQosRule",
+              "1": "theQosRuleIsTheDefaultQosRule"
+            },
+            "_name": "dqrBit"
+          },
+          {
+            "@type": "LIST",
+            "name": "Packet filter list",
+            "numberName": "numberOfPacketFilters",
+            "numberLength": 4,
             "pdu": [
-              {
-                "name": "DQR bit",
-                "length": 1,
-                "enum": {
-                  "0": "theQosRuleIsNotTheDefaultQosRule",
-                  "1": "theQosRuleIsTheDefaultQosRule"
-                },
-                "_name": "dqrBit"
-              },
-              {
-                "@type": "INTEGER",
-                "name": "Number of packet filters",
-                "length": 4,
-                "_name": "numberOfPacketFilters"
-              },
-              {
-                "@type": "MULTI",
-                "name": "Packet filter",
-                "pdu": [
-                  {
-                    "@type": "SPARE",
-                    "name": "Spare",
-                    "length": 2,
-                    "value": 0,
-                    "_name": "spare"
-                  },
-                  {
-                    "name": "Packet filter direction",
-                    "length": 2,
-                    "enum": {
-                      "0": "reserved",
-                      "1": "downlinkOnly",
-                      "2": "uplinkOnly",
-                      "3": "bidirectional"
-                    },
-                    "_name": "packetFilterDirection"
-                  },
-                  {
-                    "@type": "INTEGER",
-                    "name": "packet filter identifier",
-                    "length": 4,
-                    "_name": "packetFilterIdentifier"
-                  },
-                  {
-                    "name": "packet filter container",
-                    "pdu": [
-                      {
-                        "@type": "INTEGER",
-                        "name": "Length",
-                        "length": 8,
-                        "_name": "length"
-                      },
-                      {
-                        "name": "Packet filter component type",
-                        "length": 8,
-                        "enum": {
-                          "1": "matchallType",
-                          "16": "ipv4RemoteAddressType",
-                          "17": "ipv4LocalAddressType",
-                          "33": "ipv6RemoteAddressprefixLengthType",
-                          "35": "ipv6LocalAddressprefixLengthType",
-                          "48": "protocolIdentifiernextHeaderType",
-                          "64": "singleLocalPortType",
-                          "65": "localPortRangeType",
-                          "80": "singleRemotePortType",
-                          "81": "remotePortRangeType",
-                          "96": "securityParameterIndexType",
-                          "112": "typeOfServicetrafficClassType",
-                          "128": "flowLabelType",
-                          "129": "destinationMacAddressType",
-                          "130": "sourceMacAddressType",
-                          "131": "802.1qCtagVidType",
-                          "132": "802.1qStagVidType",
-                          "133": "802.1qCtagPcpdeiType",
-                          "134": "802.1qStagPcpdeiType",
-                          "135": "ethertypeType"
-                        },
-                        "_name": "packetFilterComponentType"
-                      },
-                      {
-                        "@type": "BIN",
-                        "name": "Packet filter content",
-                        "length": -1,
-                        "_name": "packetFilterContent"
-                      }
-                    ],
-                    "_name": "packetFilterContainer"
-                  }
-                ],
-                "_name": "packetFilter"
-              },
-              {
-                "@type": "INTEGER",
-                "name": "Qos rule preference",
-                "length": 8,
-                "_name": "qosRulePreference"
-              },
               {
                 "@type": "SPARE",
                 "name": "Spare",
-                "length": 1,
+                "length": 2,
                 "value": 0,
                 "_name": "spare"
               },
               {
-                "name": "E bit",
-                "length": 1,
+                "name": "Packet filter direction",
+                "length": 2,
                 "enum": {
-                  "0": "segregationNotRequested",
-                  "1": "segregationRequested"
+                  "0": "reserved",
+                  "1": "downlinkOnly",
+                  "2": "uplinkOnly",
+                  "3": "bidirectional"
                 },
-                "_name": "eBit"
+                "_name": "packetFilterDirection"
               },
               {
-                "@type": "INTEGER",
-                "name": "Qos flow identifier",
-                "length": 6,
-                "_name": "qosFlowIdentifier"
+                "@type": "IE",
+                "name": "Packet filter type1",
+                "nBitLength": 8,
+                "idLength": 4,
+                "_name": "packetFilterType1"
               }
             ],
-            "_name": "createNewQosRule"
+            "_name": "packetFilterList"
           },
           {
-            "name": "Modify existing QoS rule and add packet filters",
-            "tag": 3,
-            "pdu": [
-              {
-                "name": "DQR bit",
-                "length": 1,
-                "enum": {
-                  "0": "theQosRuleIsNotTheDefaultQosRule",
-                  "1": "theQosRuleIsTheDefaultQosRule"
-                },
-                "_name": "dqrBit"
-              },
-              {
-                "@type": "INTEGER",
-                "name": "Number of packet filters",
-                "length": 4,
-                "_name": "numberOfPacketFilters"
-              },
-              {
-                "@type": "MULTI",
-                "name": "Packet filter",
-                "pdu": [
-                  {
-                    "@type": "SPARE",
-                    "name": "Spare",
-                    "length": 2,
-                    "value": 0,
-                    "_name": "spare"
-                  },
-                  {
-                    "name": "Packet filter direction",
-                    "length": 2,
-                    "enum": {
-                      "0": "reserved",
-                      "1": "downlinkOnly",
-                      "2": "uplinkOnly",
-                      "3": "bidirectional"
-                    },
-                    "_name": "packetFilterDirection"
-                  },
-                  {
-                    "@type": "INTEGER",
-                    "name": "packet filter identifier",
-                    "length": 4,
-                    "_name": "packetFilterIdentifier"
-                  },
-                  {
-                    "name": "packet filter container",
-                    "pdu": [
-                      {
-                        "@type": "INTEGER",
-                        "name": "Length",
-                        "length": 8,
-                        "_name": "length"
-                      },
-                      {
-                        "name": "Packet filter component type",
-                        "length": 8,
-                        "enum": {
-                          "1": "matchallType",
-                          "16": "ipv4RemoteAddressType",
-                          "17": "ipv4LocalAddressType",
-                          "33": "ipv6RemoteAddressprefixLengthType",
-                          "35": "ipv6LocalAddressprefixLengthType",
-                          "48": "protocolIdentifiernextHeaderType",
-                          "64": "singleLocalPortType",
-                          "65": "localPortRangeType",
-                          "80": "singleRemotePortType",
-                          "81": "remotePortRangeType",
-                          "96": "securityParameterIndexType",
-                          "112": "typeOfServicetrafficClassType",
-                          "128": "flowLabelType",
-                          "129": "destinationMacAddressType",
-                          "130": "sourceMacAddressType",
-                          "131": "802.1qCtagVidType",
-                          "132": "802.1qStagVidType",
-                          "133": "802.1qCtagPcpdeiType",
-                          "134": "802.1qStagPcpdeiType",
-                          "135": "ethertypeType"
-                        },
-                        "_name": "packetFilterComponentType"
-                      },
-                      {
-                        "@type": "BIN",
-                        "name": "Packet filter content",
-                        "length": -1,
-                        "_name": "packetFilterContent"
-                      }
-                    ],
-                    "_name": "packetFilterContainer"
-                  }
-                ],
-                "_name": "packetFilter"
-              },
-              {
-                "@type": "INTEGER",
-                "name": "Qos rule preference",
-                "length": 8,
-                "_name": "qosRulePreference"
-              },
-              {
-                "@type": "SPARE",
-                "name": "Spare",
-                "length": 1,
-                "value": 0,
-                "_name": "spare"
-              },
-              {
-                "name": "E bit",
-                "length": 1,
-                "enum": {
-                  "0": "segregationNotRequested",
-                  "1": "segregationRequested"
-                },
-                "_name": "eBit"
-              },
-              {
-                "@type": "INTEGER",
-                "name": "Qos flow identifier",
-                "length": 6,
-                "_name": "qosFlowIdentifier"
-              }
-            ],
-            "_name": "modifyExistingQosRuleAndAddPacketFilters"
+            "@type": "INTEGER",
+            "name": "Qos rule precedence",
+            "length": 8,
+            "_name": "qosRulePrecedence"
           },
           {
-            "name": "Modify existing QoS rule and replace all packet filters",
-            "tag": 4,
-            "pdu": [
-              {
-                "name": "DQR bit",
-                "length": 1,
-                "enum": {
-                  "0": "theQosRuleIsNotTheDefaultQosRule",
-                  "1": "theQosRuleIsTheDefaultQosRule"
-                },
-                "_name": "dqrBit"
-              },
-              {
-                "@type": "INTEGER",
-                "name": "Number of packet filters",
-                "length": 4,
-                "_name": "numberOfPacketFilters"
-              },
-              {
-                "@type": "MULTI",
-                "name": "Packet filter",
-                "contentLength": "Number",
-                "pdu": [
-                  {
-                    "@type": "SPARE",
-                    "name": "Spare",
-                    "length": 2,
-                    "value": 0,
-                    "_name": "spare"
-                  },
-                  {
-                    "name": "Packet filter direction",
-                    "length": 2,
-                    "enum": {
-                      "0": "reserved",
-                      "1": "downlinkOnly",
-                      "2": "uplinkOnly",
-                      "3": "bidirectional"
-                    },
-                    "_name": "packetFilterDirection"
-                  },
-                  {
-                    "@type": "INTEGER",
-                    "name": "packet filter identifier",
-                    "length": 4,
-                    "_name": "packetFilterIdentifier"
-                  },
-                  {
-                    "name": "packet filter container",
-                    "pdu": [
-                      {
-                        "@type": "INTEGER",
-                        "name": "Length",
-                        "length": 8,
-                        "_name": "length"
-                      },
-                      {
-                        "name": "Packet filter component type",
-                        "length": 8,
-                        "enum": {
-                          "1": "matchallType",
-                          "16": "ipv4RemoteAddressType",
-                          "17": "ipv4LocalAddressType",
-                          "33": "ipv6RemoteAddressprefixLengthType",
-                          "35": "ipv6LocalAddressprefixLengthType",
-                          "48": "protocolIdentifiernextHeaderType",
-                          "64": "singleLocalPortType",
-                          "65": "localPortRangeType",
-                          "80": "singleRemotePortType",
-                          "81": "remotePortRangeType",
-                          "96": "securityParameterIndexType",
-                          "112": "typeOfServicetrafficClassType",
-                          "128": "flowLabelType",
-                          "129": "destinationMacAddressType",
-                          "130": "sourceMacAddressType",
-                          "131": "802.1qCtagVidType",
-                          "132": "802.1qStagVidType",
-                          "133": "802.1qCtagPcpdeiType",
-                          "134": "802.1qStagPcpdeiType",
-                          "135": "ethertypeType"
-                        },
-                        "_name": "packetFilterComponentType"
-                      },
-                      {
-                        "@type": "BIN",
-                        "name": "Packet filter content",
-                        "length": -1,
-                        "_name": "packetFilterContent"
-                      }
-                    ],
-                    "_name": "packetFilterContainer"
-                  }
-                ],
-                "_name": "packetFilter"
-              },
-              {
-                "@type": "INTEGER",
-                "name": "Qos rule preference",
-                "length": 8,
-                "_name": "qosRulePreference"
-              },
-              {
-                "@type": "SPARE",
-                "name": "Spare",
-                "length": 1,
-                "value": 0,
-                "_name": "spare"
-              },
-              {
-                "name": "E bit",
-                "length": 1,
-                "enum": {
-                  "0": "segregationNotRequested",
-                  "1": "segregationRequested"
-                },
-                "_name": "eBit"
-              },
-              {
-                "@type": "INTEGER",
-                "name": "Qos flow identifier",
-                "length": 6,
-                "_name": "qosFlowIdentifier"
-              }
-            ],
-            "_name": "modifyExistingQosRuleAndReplaceAllPacketFilters"
+            "@type": "SPARE",
+            "name": "Spare",
+            "length": 1,
+            "value": 0,
+            "_name": "spare"
           },
           {
-            "name": "Modify existing QoS rule and delete packet filters",
-            "tag": 5,
-            "pdu": [
-              {
-                "name": "DQR bit",
-                "length": 1,
-                "enum": {
-                  "0": "theQosRuleIsNotTheDefaultQosRule",
-                  "1": "theQosRuleIsTheDefaultQosRule"
-                },
-                "_name": "dqrBit"
-              },
-              {
-                "@type": "INTEGER",
-                "name": "Number of packet filters",
-                "length": 4,
-                "_name": "numberOfPacketFilters"
-              },
-              {
-                "@type": "MULTI",
-                "name": "Packet filter",
-                "pdu": [
-                  {
-                    "@type": "SPARE",
-                    "name": "Spare",
-                    "length": 4,
-                    "value": 0,
-                    "_name": "spare"
-                  },
-                  {
-                    "@type": "INTEGER",
-                    "name": "Packet filter identifier",
-                    "length": 4,
-                    "_name": "packetFilterIdentifier"
-                  }
-                ],
-                "_name": "packetFilter"
-              }
-            ],
-            "_name": "modifyExistingQosRuleAndDeletePacketFilters"
+            "name": "E bit",
+            "length": 1,
+            "enum": {
+              "0": "segregationNotRequested",
+              "1": "segregationRequested"
+            },
+            "_name": "eBit"
+          },
+          {
+            "@type": "INTEGER",
+            "name": "Qos flow identifier",
+            "length": 6,
+            "_name": "qosFlowIdentifier"
           }
         ],
-        "_name": "ruleOperationCode"
+        "_name": "createNewQosRule"
+      },
+      {
+        "name": "Modify existing QoS rule and add packet filters",
+        "tag": 3,
+        "pdu": [
+          {
+            "name": "DQR bit",
+            "length": 1,
+            "enum": {
+              "0": "theQosRuleIsNotTheDefaultQosRule",
+              "1": "theQosRuleIsTheDefaultQosRule"
+            },
+            "_name": "dqrBit"
+          },
+          {
+            "@type": "LIST",
+            "name": "Packet filter list",
+            "numberName": "numberOfPacketFilters",
+            "numberLength": 4,
+            "pdu": [
+              {
+                "@type": "SPARE",
+                "name": "Spare",
+                "length": 2,
+                "value": 0,
+                "_name": "spare"
+              },
+              {
+                "name": "Packet filter direction",
+                "length": 2,
+                "enum": {
+                  "0": "reserved",
+                  "1": "downlinkOnly",
+                  "2": "uplinkOnly",
+                  "3": "bidirectional"
+                },
+                "_name": "packetFilterDirection"
+              },
+              {
+                "@type": "IE",
+                "name": "Packet filter type1",
+                "nBitLength": 8,
+                "idLength": 4,
+                "_name": "packetFilterType1"
+              }
+            ],
+            "_name": "packetFilterList"
+          },
+          {
+            "@type": "INTEGER",
+            "name": "Qos rule precedence",
+            "length": 8,
+            "_name": "qosRulePrecedence"
+          },
+          {
+            "@type": "SPARE",
+            "name": "Spare",
+            "length": 1,
+            "value": 0,
+            "_name": "spare"
+          },
+          {
+            "name": "E bit",
+            "length": 1,
+            "enum": {
+              "0": "segregationNotRequested",
+              "1": "segregationRequested"
+            },
+            "_name": "eBit"
+          },
+          {
+            "@type": "INTEGER",
+            "name": "Qos flow identifier",
+            "length": 6,
+            "_name": "qosFlowIdentifier"
+          }
+        ],
+        "_name": "modifyExistingQosRuleAndAddPacketFilters"
+      },
+      {
+        "name": "Modify existing QoS rule and replace all packet filters",
+        "tag": 4,
+        "pdu": [
+          {
+            "name": "DQR bit",
+            "length": 1,
+            "enum": {
+              "0": "theQosRuleIsNotTheDefaultQosRule",
+              "1": "theQosRuleIsTheDefaultQosRule"
+            },
+            "_name": "dqrBit"
+          },
+          {
+            "@type": "LIST",
+            "name": "Packet filter list",
+            "numberName": "numberOfPacketFilters",
+            "numberLength": 4,
+            "pdu": [
+              {
+                "@type": "SPARE",
+                "name": "Spare",
+                "length": 2,
+                "value": 0,
+                "_name": "spare"
+              },
+              {
+                "name": "Packet filter direction",
+                "length": 2,
+                "enum": {
+                  "0": "reserved",
+                  "1": "downlinkOnly",
+                  "2": "uplinkOnly",
+                  "3": "bidirectional"
+                },
+                "_name": "packetFilterDirection"
+              },
+              {
+                "@type": "IE",
+                "name": "Packet filter type1",
+                "nBitLength": 8,
+                "idLength": 4,
+                "_name": "packetFilterType1"
+              }
+            ],
+            "_name": "packetFilterList"
+          },
+          {
+            "@type": "INTEGER",
+            "name": "Qos rule precedence",
+            "length": 8,
+            "_name": "qosRulePrecedence"
+          },
+          {
+            "@type": "SPARE",
+            "name": "Spare",
+            "length": 1,
+            "value": 0,
+            "_name": "spare"
+          },
+          {
+            "name": "E bit",
+            "length": 1,
+            "enum": {
+              "0": "segregationNotRequested",
+              "1": "segregationRequested"
+            },
+            "_name": "eBit"
+          },
+          {
+            "@type": "INTEGER",
+            "name": "Qos flow identifier",
+            "length": 6,
+            "_name": "qosFlowIdentifier"
+          }
+        ],
+        "_name": "modifyExistingQosRuleAndReplaceAllPacketFilters"
+      },
+      {
+        "name": "Modify existing QoS rule and delete packet filters",
+        "tag": 5,
+        "pdu": [
+          {
+            "name": "DQR bit",
+            "length": 1,
+            "enum": {
+              "0": "theQosRuleIsNotTheDefaultQosRule",
+              "1": "theQosRuleIsTheDefaultQosRule"
+            },
+            "_name": "dqrBit"
+          },
+          {
+            "@type": "LIST",
+            "name": "Packet filter list",
+            "numberName": "numberOfPacketFilters",
+            "numberLength": 4,
+            "pdu": [
+              {
+                "@type": "SPARE",
+                "name": "Spare",
+                "length": 4,
+                "value": 0,
+                "_name": "spare"
+              },
+              {
+                "@type": "INTEGER",
+                "name": "Packet filter identifier",
+                "length": 4,
+                "_name": "packetFilterIdentifier"
+              }
+            ],
+            "_name": "packetFilterList"
+          }
+        ],
+        "_name": "modifyExistingQosRuleAndDeletePacketFilters"
       }
     ],
     "_name": "qosRule"
@@ -836,13 +720,13 @@
     "name": "Integrity protection maximum data rate",
     "pdu": [
       {
-        "@type": "BIN",
+        "@type": "INTEGER",
         "name": "Maximum data rate per UE for user-plane integrity protection for uplink",
         "length": 8,
         "_name": "maximumDataRatePerUeForUserplaneIntegrityProtectionForUplink"
       },
       {
-        "@type": "BIN",
+        "@type": "INTEGER",
         "name": "Maximum data rate per UE for user-plane integrity protection for downlink",
         "length": 8,
         "_name": "maximumDataRatePerUeForUserplaneIntegrityProtectionForDownlink"

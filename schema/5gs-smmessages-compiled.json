@@ -171,9 +171,9 @@
       },
       {
         "type": "Session-AMBR",
+        "nBitLength": 8,
         "_type": "sessionambr",
-        "_name": "sessionambr",
-        "nBitLength": 8
+        "_name": "sessionambr"
       }
     ],
     "optional": {

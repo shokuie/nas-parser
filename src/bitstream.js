@@ -190,7 +190,10 @@ class BitStream {
           carry = tmp;
         }, 0);
 
-        if (shift + len > 8) {
+//        if (shift + len > 8) {
+        const lenOverflow = len % 8;
+
+        if (8 - lenOverflow < shift || !lenOverflow) {
           argArray.push(carry << 8 - shift);
         }
       }

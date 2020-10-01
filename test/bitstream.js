@@ -84,6 +84,36 @@ describe('#sum()', () => {
     });
   });
 
+  context('Appending uint string', () => {
+    it('should return ffffffff with length of 32 bits', () => {
+      const testStream = new BitStream('uint:4=15');
+      testStream.append(new BitStream('uint:28=268435455'));
+      expect(testStream.length()).to.equal(32);
+      expect(testStream.buf.length * 8).to.equal(testStream.length());
+      expect(testStream.readBits(32)).to.deep.equal(Buffer.from('ffffffff', 'hex'));
+    });
+  });
+
+  context('Appending uint string', () => {
+    it('should return fffffff8 with length of 29 bits', () => {
+      const testStream = new BitStream('uint:1=1');
+      testStream.append(new BitStream('uint:28=268435455'));
+      expect(testStream.length()).to.equal(29);
+      expect(testStream.buf.length).to.equal(4);
+      expect(testStream.readBits(32)).to.deep.equal(Buffer.from('fffffff8', 'hex'));
+    });
+  });
+
+  context('Appending uint string', () => {
+    it('should return f0f with length of 12 bits', () => {
+      const testStream = new BitStream('uint:4=15');
+      testStream.append(new BitStream('byte=15'));
+      expect(testStream.length()).to.equal(12);
+      expect(testStream.buf.length).to.equal(2);
+      expect(testStream.readBits(12)).to.deep.equal(Buffer.from('0f0f', 'hex'));
+    });
+  });
+
   context('Appending uint', () => {
     it('should return 226', () => {
       const testStream = new BitStream('uint:6=56');
