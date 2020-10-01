@@ -644,6 +644,18 @@
     "_name": "authenticationResponseParameter"
   },
   {
+    "name": "Authentication failure parameter",
+    "pdu": [
+      {
+        "@type": "BIN",
+        "name": "ATUS",
+        "length": 112,
+        "_name": "atus"
+      }
+    ],
+    "_name": "authenticationFailureParameter"
+  },
+  {
     "name": "EAP message",
     "pdu": [
       {
@@ -2048,6 +2060,55 @@
       }
     ],
     "_name": "additionalInformation"
+  },
+  {
+    "name": "5GMM cause",
+    "pdu": [
+      {
+        "name": "Cause value",
+        "length": 8,
+        "enum": {
+          "3": "illegalUe",
+          "5": "peiNotAccepted",
+          "6": "illegalMe",
+          "7": "5gsServicesNotAllowed",
+          "9": "ueIdentityCannotBeDerivedByTheNetwork",
+          "10": "implicitlyDeregistered",
+          "11": "plmnNotAllowed",
+          "12": "trackingAreaNotAllowed",
+          "13": "roamingNotAllowedInThisTrackingArea",
+          "15": "noSuitableCellsInTrackingArea",
+          "20": "macFailure",
+          "21": "synchFailure",
+          "22": "congestion",
+          "23": "ueSecurityCapabilitiesMismatch",
+          "24": "securityModeRejected,Unspecified",
+          "26": "non5gAuthenticationUnacceptable",
+          "27": "n1ModeNotAllowed",
+          "28": "restrictedServiceArea",
+          "43": "ladnNotAvailable",
+          "65": "maximumNumberOfPduSessionsReached",
+          "67": "insufficientResourcesForSpecificSliceAndDnn",
+          "69": "insufficientResourcesForSpecificSlice",
+          "71": "ngksiAlreadyInUse",
+          "72": "non3gppAccessTo5gcnNotAllowed",
+          "73": "servingNetworkNotAuthorized",
+          "90": "payloadWasNotForwarded",
+          "91": "dnnNotSupportedOrNotSubscribedInTheSlice",
+          "92": "insufficientUserplaneResourcesForThePduSession",
+          "95": "semanticallyIncorrectMessage",
+          "96": "invalidMandatoryInformation",
+          "97": "messageTypeNonexistentOrNotImplemented",
+          "98": "messageTypeNotCompatibleWithTheProtocolState",
+          "99": "informationElementNonexistentOrNotImplemented",
+          "100": "conditionalIeError",
+          "101": "messageNotCompatibleWithTheProtocolState",
+          "111": "protocolError,Unspecified"
+        },
+        "_name": "causeValue"
+      }
+    ],
+    "_name": "5gmmCause"
   },
   {
     "name": "5GSM cause",

@@ -327,6 +327,27 @@
     "_name": "authenticationResponse"
   },
   {
+    "name": "Authentication failure",
+    "mandatory": [
+      {
+        "type": "5GMM cause",
+        "length": 8,
+        "_type": "5gmmCause",
+        "_name": "5gmmCause"
+      }
+    ],
+    "optional": [
+      {
+        "iei": 48,
+        "type": "Authentication failure parameter",
+        "length": 128,
+        "_type": "authenticationFailureParameter",
+        "_name": "authenticationFailureParameter"
+      }
+    ],
+    "_name": "authenticationFailure"
+  },
+  {
     "name": "Security mode command",
     "mandatory": [
       {
