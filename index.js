@@ -153,64 +153,68 @@ function decode5gsMessage(stream, messageName, type) {
 
   ieSet[type === _5GMM ? 'mmMessageName' : 'messageName'] = msg._name;
 
-  msg.mandatory.forEach((manIe) => {
-    const manIeDef = elements[type].find((elem) => elem._name === manIe._type);
+  if (msg.mandatory) {
+    msg.mandatory.forEach((manIe) => {
+      const manIeDef = elements[type].find((elem) => elem._name === manIe._type);
 
-    let len = 0;
+      let len = 0;
 
-    if (manIe.length === -1) {
-      throw new Error(`IE with -1 length encountered: ${manIe.type}`);
-    }
+      if (manIe.length === -1) {
+        throw new Error(`IE with -1 length encountered: ${manIe.type}`);
+      }
 
-    if (manIe.length && manIe.length !== -1) {
-      len = manIe.length;
-    } else if (manIe.nBitLength) {
-      len = decoders.UINT(stream.readBits(manIe.nBitLength)) * 8;
-    } else {
-//      throw new Error(`Unknwon length IE: ${manIe.type}`);
-      len = -1;
-    }
+      if (manIe.length && manIe.length !== -1) {
+        len = manIe.length;
+      } else if (manIe.nBitLength) {
+        len = decoders.UINT(stream.readBits(manIe.nBitLength)) * 8;
+      } else {
+  //      throw new Error(`Unknwon length IE: ${manIe.type}`);
+        len = -1;
+      }
 
-    const ieStream = stream.slice(len);
-//    ieSet[manIeDef._name] = decodeInfoElement(ieStream, manIeDef);
-    ieSet[manIe._name] = decodeInfoElement(ieStream, manIeDef);
-  });
+      const ieStream = stream.slice(len);
+  //    ieSet[manIeDef._name] = decodeInfoElement(ieStream, manIeDef);
+      ieSet[manIe._name] = decodeInfoElement(ieStream, manIeDef);
+    });
+  }
 
   let optIeTag;
 
-  // eslint-disable-next-line no-cond-assign
-  while ((optIeTag = stream.readBits(4)).length) {
-    //  while ((optIeTag = stream.readBits(8)).length) {
-    let tag = decoders.UINT(optIeTag);
-//    let optIe = msg.optional[tag.toString(16).toUpperCase()];
-    let optIe = msg.optional.find((elem) => elem.iei === tag);
+  if (msg.optional) {
+    // eslint-disable-next-line no-cond-assign
+    while ((optIeTag = stream.readBits(4)).length) {
+      //  while ((optIeTag = stream.readBits(8)).length) {
+      let tag = decoders.UINT(optIeTag);
+  //    let optIe = msg.optional[tag.toString(16).toUpperCase()];
+      let optIe = msg.optional.find((elem) => elem.iei === tag);
 
-    if (!optIe) {
-      // eslint-disable-next-line no-bitwise
-      tag = (tag << 4) | decoders.UINT(stream.readBits(4));
-//      optIe = msg.optional[tag.toString(16).toUpperCase()];
-      optIe = msg.optional.find((elem) => elem.iei === tag);
+      if (!optIe) {
+        // eslint-disable-next-line no-bitwise
+        tag = (tag << 4) | decoders.UINT(stream.readBits(4));
+  //      optIe = msg.optional[tag.toString(16).toUpperCase()];
+        optIe = msg.optional.find((elem) => elem.iei === tag);
+      }
+
+      if (!optIe) {
+        throw new Error(`Unknown IE received: ${tag.toString(16).toUpperCase()}`);
+      }
+
+      const optIeDef = elements[type].find((elem) => elem._name === optIe._type);
+      let len = 0;
+
+      if (optIe.length && optIe.length !== -1) {
+        len = optIe.length;
+      } else if (optIe.nBitLength) {
+        len = decoders.UINT(stream.readBits(optIe.nBitLength)) * 8;
+      } else {
+        throw new Error(`Unknown length attribute: ${optIe.type}`);
+  //      len = decoders.INTEGER(stream.readBits(8)) * 8;
+      }
+
+  //    const ieStream = new BitStream(Buffer.from(stream.readBits(len)));
+      const ieStream = stream.slice(len);
+      ieSet[optIe._name] = decodeInfoElement(ieStream, optIeDef);
     }
-
-    if (!optIe) {
-      throw new Error(`Unknown IE received: ${tag.toString(16).toUpperCase()}`);
-    }
-
-    const optIeDef = elements[type].find((elem) => elem._name === optIe._type);
-    let len = 0;
-
-    if (optIe.length && optIe.length !== -1) {
-      len = optIe.length;
-    } else if (optIe.nBitLength) {
-      len = decoders.UINT(stream.readBits(optIe.nBitLength)) * 8;
-    } else {
-      throw new Error(`Unknown length attribute: ${optIe.type}`);
-//      len = decoders.INTEGER(stream.readBits(8)) * 8;
-    }
-
-//    const ieStream = new BitStream(Buffer.from(stream.readBits(len)));
-    const ieStream = stream.slice(len);
-    ieSet[optIe._name] = decodeInfoElement(ieStream, optIeDef);
   }
 
   return ieSet;
@@ -368,63 +372,67 @@ function encodeInfoElement(payload, ieDef) {
 function encode5gsMessage(payload, msgDef, type) {
   const stream = new BitStream();
 
-  msgDef.mandatory.forEach((manIe) => {
-    const manIeDef = elements[type].find((elem) => elem._name === manIe._type);
+  if (msgDef.mandatory) {
+    msgDef.mandatory.forEach((manIe) => {
+      const manIeDef = elements[type].find((elem) => elem._name === manIe._type);
 
-    if (!manIeDef) {
-      throw new Error(`Unknown IE: ${manIe._type}`);
-    }
+      if (!manIeDef) {
+        throw new Error(`Unknown IE: ${manIe._type}`);
+      }
 
-    if (manIe.length === -1) {
-      throw new Error(`Unknown length for ${manIeDef._name}`);
-    }
+      if (manIe.length === -1) {
+        throw new Error(`Unknown length for ${manIeDef._name}`);
+      }
 
-//    const encIe = encodeInfoElement(payload[manIeDef._name], manIeDef);
-    const encIe = encodeInfoElement(payload[manIe._name], manIeDef);
+  //    const encIe = encodeInfoElement(payload[manIeDef._name], manIeDef);
+      const encIe = encodeInfoElement(payload[manIe._name], manIeDef);
 
-    if (manIe.nBitLength) {
-      stream.append(new BitStream(`uint:${manIe.nBitLength}=${Math.ceil(encIe.length() / 8)}`));
-    }
+      if (manIe.nBitLength) {
+        stream.append(new BitStream(`uint:${manIe.nBitLength}=${Math.ceil(encIe.length() / 8)}`));
+      }
 
-    stream.append(encIe);
-  });
+      stream.append(encIe);
+    });
+  }
 
+  if (msgDef) {
 //  Object.keys(msgDef.optional).reduce((prev, optIeTag) => {
     msgDef.optional.forEach((optIe) => {
-    if (!Object.keys(payload).find((payloadOptIe) => payloadOptIe === optIe._name)) {
-      return;
-    }
+      if (!Object.keys(payload).find((payloadOptIe) => payloadOptIe === optIe._name)) {
+        return;
+      }
 
-    const optIeDef = elements[type].find((elem) => elem._name === optIe._type);
-//    const optIeDef = elements[type].find((elem) => elem._name === msgDef.optional[optIeTag]._name);
+      const optIeDef = elements[type].find((elem) => elem._name === optIe._type);
+  //    const optIeDef = elements[type].find((elem) => elem._name === msgDef.optional[optIeTag]._name);
 
-    if (!optIeDef) {
-      throw new Error(`Unknown IE: ${optIe.type}`);
-//      throw new Error(`Unknown IE: ${msgDef.optional[optIeTag].name}`);
-    }
+      if (!optIeDef) {
+        throw new Error(`Unknown IE: ${optIe.type}`);
+  //      throw new Error(`Unknown IE: ${msgDef.optional[optIeTag].name}`);
+      }
 
-    if (optIe.length === -1) {
-      throw new Error(`Unknown length for ${optIe.type}`);
-//      throw new Error(`Unknown length for ${optIe.name}`);
-    }
+      if (optIe.length === -1) {
+        throw new Error(`Unknown length for ${optIe.type}`);
+  //      throw new Error(`Unknown length for ${optIe.name}`);
+      }
 
-    // Encoding IEI
-    if (optIe.length && optIe.length < 8) {
-      stream.append(new BitStream(`uint:${optIe.length}=${optIe.iei}`));
-    } else {
-      stream.append(new BitStream(`byte=${optIe.iei}`));
-    }
-//    const encIe = encodeInfoElement(payload[optIe._type], optIeDef);
-    const encIe = encodeInfoElement(payload[optIe._name], optIeDef);
+      // Encoding IEI
+      if (optIe.length && optIe.length < 8) {
+        stream.append(new BitStream(`uint:${optIe.length}=${optIe.iei}`));
+      } else {
+        stream.append(new BitStream(`byte=${optIe.iei}`));
+      }
+  //    const encIe = encodeInfoElement(payload[optIe._type], optIeDef);
+      const encIe = encodeInfoElement(payload[optIe._name], optIeDef);
 
-    if (optIe.nBitLength) {
-      // Encoding LI
-      stream.append(new BitStream(`uint:${optIe.nBitLength}=${Math.ceil(encIe.length() / 8)}`));
-    }
+      if (optIe.nBitLength) {
+        // Encoding LI
+        stream.append(new BitStream(`uint:${optIe.nBitLength}=${Math.ceil(encIe.length() / 8)}`));
+      }
 
-    // Adding IE Value part
-    stream.append(encIe);
-  }, 0);
+      // Adding IE Value part
+      stream.append(encIe);
+    }, 0);
+  }
 
   return stream;
 }

@@ -312,7 +312,7 @@
       {
         "iei": 45,
         "type": "Authentication response parameter",
-        "length": -1,
+        "nBitLength": 8,
         "_type": "authenticationResponseParameter",
         "_name": "authenticationResponseParameter"
       },
