@@ -7,9 +7,6 @@
       "securityHeaderTypeValue": "plainNasMessageNotSecurityProtected"
     },
     "messageName": "authenticationRequest",
-    "spareHalfOctet": {
-      "spare": "0x00"
-    },
     "ngksi": {
       "tsc": "nativeSecurityContextForKsiamf",
       "nasKeySetIdentifierValue": 1

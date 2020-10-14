@@ -350,8 +350,7 @@ function encodeInfoElement(payload, ieDef) {
   if (ieDef.pdu) {
     try {
       ieDef.pdu.forEach((elem) => {
-//        stream.append(encodeInfoElement(payload, elem));
-        stream.append(encodeInfoElement(payload[elem._name], elem));
+        stream.append(encodeInfoElement(payload && payload[elem._name], elem));
       });
     } catch (Err) {
       return stream;
