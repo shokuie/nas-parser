@@ -1,21 +1,29 @@
 {
-  "messageType": "authenticationRequest",
-  "spareHalfOctet": {
-    "spare": 0
-  },
-  "nasKeySetIdentifier": {
-    "tsc": "nativeSecurityContextForKsiamf",
-    "nasKeySetIdentifierValue": 1
-  },
-  "abba": {
-    "abbaContent": "0x0000"
-  },
-  "authenticationParameterRand": {
-    "rand": "0x19f4f9238f9416bb64d0c10c3abb242d"
-  },
-  "authenticationParameterAutn": {
-    "sqnXorAk": "0xaa29499f6286",
-    "amf": "0xe282",
-    "mac": "0x215f57fd4f115f0b"
+  "plainNas": {
+    "extendedProtocolDiscriminator": {
+      "extendedProtocolDiscriminatorValue": "5gsMobilityManagementMessages"
+    },
+    "securityHeaderType": {
+      "securityHeaderTypeValue": "plainNasMessageNotSecurityProtected"
+    },
+    "messageName": "authenticationRequest",
+    "spareHalfOctet": {
+      "spare": "0x00"
+    },
+    "ngksi": {
+      "tsc": "nativeSecurityContextForKsiamf",
+      "nasKeySetIdentifierValue": 1
+    },
+    "abba": {
+      "abbaContent": "0x0000"
+    },
+    "authenticationParameterRand": {
+      "rand": "0x19f4f9238f9416bb64d0c10c3abb242d"
+    },
+    "authenticationParameterAutn": {
+      "sqnXorAk": "0xaa29499f6286",
+      "amf": "0xe282",
+      "mac": "0x215f57fd4f115f0b"
+    }
   }
 }

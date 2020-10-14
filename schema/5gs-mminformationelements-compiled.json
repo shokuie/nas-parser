@@ -48,7 +48,7 @@
     "name": "Message authentication code",
     "pdu": [
       {
-        "@type": "HEXA",
+        "@type": "BIN",
         "name": "Message authentication code value",
         "length": 32,
         "_name": "messageAuthenticationCodeValue"

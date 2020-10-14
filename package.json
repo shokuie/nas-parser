@@ -25,6 +25,7 @@
     "mocha": "^7.2.0"
   },
   "dependencies": {
-    "js0xn": "^0.2.1"
+    "js0xn": "^0.2.1",
+    "node-aes-cmac": "^0.1.1"
   }
 }
