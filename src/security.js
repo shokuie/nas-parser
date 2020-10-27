@@ -3,10 +3,11 @@ const { aesCmac } = require('node-aes-cmac');
 const security = exports;
 
 security.calculateMac = (options, message) => {
-  const { cipheringAlg, intAlg, keyNasInt, count, bearer, dir } = options;
+  const { cipheringAlg, intAlg, count, bearer, dir } = options;
+  let { keyNasInt } = options;
 
-  if (keyNasInt.length !== 16) {
-    throw new Error('Expectin NAS Integrity key length of 128 bits');
+  if (keyNasInt.length > 16) {
+    keyNasInt = keyNasInt.slice(-16);
   }
 
   if (count.length !== 4) {

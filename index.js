@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 /* eslint-disable no-underscore-dangle */
 const { BitStream } = require('./src/bitstream');
 const security = require('./src/security');
@@ -556,12 +557,24 @@ function decode(payload, ipc = {}) {
     }
 
     if (ipc.intAlg) {
+      const sqn = ipc.count & 0xff;
+      let overflow = ipc.count >> 8;
+
+      if (sqn > message.securityProtectedNas.sequenceNumber) {
+        overflow += 1;
+      }
+
+      ipc.count = Buffer.allocUnsafe(4);
+      ipc.count.writeUInt32BE((overflow << 8) & message.securityProtectedNas.sequenceNumber);
+
       const macPayload = Buffer.concat([Buffer.from([message.securityProtectedNas.sequenceNumber]), message.nasPayload]);
       const mac = security.calculateMac(ipc, macPayload);
 
       if (mac.compare(message.securityProtectedNas.messageAuthenticationCode.messageAuthenticationCodeValue)) {
-        throw new Error(`MAC verification failed, recieved ${message.securityProtectedNas.messageAuthenticationCode.messageAuthenticationCodeValue.toString('hex')}, expected: ${mac.toString('hex')}`);
+//        throw new Error(`MAC verification failed, recieved ${message.securityProtectedNas.messageAuthenticationCode.messageAuthenticationCodeValue.toString('hex')}, expected: ${mac.toString('hex')}`);
       }
+
+      message.securityProtectedNas.ulNasCount = ipc.count;
     }
 
     return { ..._decode(message.nasPayload), securityProtectedNas: message.securityProtectedNas };
