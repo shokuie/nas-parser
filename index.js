@@ -516,6 +516,11 @@ function encode(payload, ipc = {}) {
     const type = payload.securityProtectedNas.extendedProtocolDiscriminator.extendedProtocolDiscriminatorValue;
     const stream = encodeInfoElement(payload.securityProtectedNas.sequenceNumber, elements[type].find((elem) => elem._name === 'sequenceNumber'));
     stream.append(tempStream);
+
+    const { count } = ipc;
+    ipc.count = Buffer.allocUnsafe(4);
+    ipc.count.writeUInt32BE(count);
+
     const mac = security.calculateMac(ipc, stream.buf);
     tempStream = encodeInfoElement(payload.securityProtectedNas.extendedProtocolDiscriminator, cInfoElements.find((elem) => elem._name === 'extendedProtocolDiscriminator')); // EPD
     tempStream.append(new BitStream('uint:4=0')); // Spare half octet
