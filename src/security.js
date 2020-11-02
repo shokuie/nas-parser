@@ -24,7 +24,7 @@ security.calculateMac = (options, message) => {
 
   let mac;
 
-  switch (intAlg) {
+  switch (intAlg.toUpperCase()) {
     case '1285GIA2': {
       // eslint-disable-next-line no-bitwise
       const msg = Buffer.concat([count, Buffer.from([((bearer << 3) | (dir << 2)) & 0xff, 0, 0, 0]), message]);
