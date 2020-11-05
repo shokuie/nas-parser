@@ -18,13 +18,17 @@ security.calculateMac = (options, message) => {
     throw new Error('Empty NAS payload provided');
   }
 
-  if (cipheringAlg && cipheringAlg !== '5gea0') {
+/*  if (cipheringAlg && cipheringAlg !== '5gea0') {
     throw new Error(`Ciphering algorithm (${cipheringAlg}) not supported`);
   }
-
+*/
   let mac;
 
   switch (intAlg.toUpperCase()) {
+    case '5GIA0':
+      mac = Buffer.from('00000000', 'hex');
+      break;
+
     case '1285GIA2': {
       // eslint-disable-next-line no-bitwise
       const msg = Buffer.concat([count, Buffer.from([((bearer << 3) | (dir << 2)) & 0xff, 0, 0, 0]), message]);
