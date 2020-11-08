@@ -428,38 +428,7 @@
   },
   {
     "name": "NAS message container",
-    "pdu": [
-      {
-        "name": "Extended protocol discriminator",
-        "length": 8,
-        "enum": {
-          "46": "5gsSessionManagementMessages",
-          "126": "5gsMobilityManagementMessages"
-        },
-        "_name": "extendedProtocolDiscriminator"
-      },
-      {
-        "@type": "SPARE",
-        "name": "Spare",
-        "length": 4,
-        "value": 0,
-        "_name": "spare"
-      },
-      {
-        "@type": "MESSAGE_WRAPPER",
-        "name": "Security header type",
-        "length": 4,
-        "enum": {
-          "0": "plain5gsNasMessageNotSecurityProtected",
-          "1": "integrityProtected",
-          "2": "integrityProtectedAndCiphered",
-          "3": "integrityProtectedWithNew5gNasSecurityContext",
-          "4": "integrityProtectedAndCipheredWithNew5gNasSecurityContext",
-          "5": "securityProtectedNasMessage:IntegrityProtectedAndPartiallyCipheredNasMessage"
-        },
-        "_name": "securityHeaderType"
-      }
-    ],
+    "@type": "MESSAGE",
     "_name": "nasMessageContainer"
   },
   {
@@ -789,119 +758,112 @@
       {
         "@type": "MULTI",
         "name": "S-NSSAI value",
-        "contentLength": "Length",
-        "nBit": 8,
         "pdu": [
           {
             "@type": "CHOICE",
             "name": "S-NSSAI",
-            "field": {
-              "name": "Length of S-NSSAI contents",
-              "length": 8,
-              "enum": {
-                "1": "SST",
-                "2": "SST and mapped HPLMN SST",
-                "4": "SST and SD",
-                "5": "SST, SD and mapped HPLMN SST",
-                "8": "SST, SD, mapped HPLMN SST and mapped HPLMN SD"
-              }
-            },
-            "pdus": [
+            "length": 8,
+            "elements": [
               {
-                "keys": [
-                  1,
-                  7
-                ],
-                "pdu": [
-                  {
-                    "@type": "BIN",
-                    "name": "SST",
-                    "length": 8
-                  }
-                ]
+                "@type": "INTEGER",
+                "tag": 1,
+                "name": "SST",
+                "length": 8,
+                "_name": "sst"
               },
               {
-                "keys": [
-                  2
-                ],
+                "tag": 2,
+                "name": "HPLMN SST",
                 "pdu": [
                   {
-                    "@type": "BIN",
+                    "@type": "INTEGER",
                     "name": "SST",
-                    "length": 8
+                    "length": 8,
+                    "_name": "sst"
                   },
                   {
-                    "@type": "BIN",
+                    "@type": "INTEGER",
                     "name": "mapped HPLMN SST",
-                    "length": 8
+                    "length": 8,
+                    "_name": "mappedHplmnSst"
                   }
-                ]
+                ],
+                "_name": "hplmnSst"
               },
               {
-                "keys": [
-                  4
-                ],
+                "tag": 4,
+                "name": "SD",
                 "pdu": [
                   {
-                    "@type": "BIN",
+                    "@type": "INTEGER",
                     "name": "SST",
-                    "length": 8
+                    "length": 8,
+                    "_name": "sst"
                   },
                   {
-                    "@type": "BIN",
-                    "name": "SD",
-                    "length": 24
+                    "@type": "INTEGER",
+                    "name": "SD Value",
+                    "length": 24,
+                    "_name": "sdValue"
                   }
-                ]
+                ],
+                "_name": "sd"
               },
               {
-                "keys": [
-                  5
-                ],
+                "tag": 5,
+                "name": "SD HPLMN",
                 "pdu": [
                   {
-                    "@type": "BIN",
+                    "@type": "INTEGER",
                     "name": "SST",
-                    "length": 8
+                    "length": 8,
+                    "_name": "sst"
                   },
                   {
-                    "@type": "BIN",
-                    "name": "SD",
-                    "length": 24
+                    "@type": "INTEGER",
+                    "name": "SD Value",
+                    "length": 24,
+                    "_name": "sdValue"
                   },
                   {
-                    "@type": "BIN",
+                    "@type": "INTEGER",
                     "name": "mapped HPLMN SST",
-                    "length": 8
+                    "length": 8,
+                    "_name": "mappedHplmnSst"
                   }
-                ]
+                ],
+                "_name": "sdHplmn"
               },
               {
-                "keys": [
-                  8
-                ],
+                "tag": 8,
+                "name": "HPLMN SD",
                 "pdu": [
                   {
-                    "@type": "BIN",
+                    "@type": "INTEGER",
                     "name": "SST",
-                    "length": 8
+                    "length": 8,
+                    "_name": "sst"
                   },
                   {
-                    "@type": "BIN",
-                    "name": "SD",
-                    "length": 24
+                    "@type": "INTEGER",
+                    "name": "SD Value",
+                    "length": 24,
+                    "_name": "sdValue"
                   },
                   {
-                    "@type": "BIN",
+                    "@type": "INTEGER",
                     "name": "mapped HPLMN SST",
-                    "length": 8
+                    "length": 8,
+                    "_name": "mappedHplmnSst"
                   },
                   {
-                    "@type": "BIN",
+                    "@type": "INTEGER",
                     "name": "mapped HPLMN SD",
-                    "length": 24
+                    "length": 24,
+                    "_name": "mappedHplmnSd"
                   }
-                ]
+                ],
+                "_name": "hplmnSd"
               }
             ],
             "_name": "snssai"

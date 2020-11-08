@@ -171,7 +171,7 @@
         "iei": 47,
         "type": "NSSAI",
         "name": "Requested NSSAI",
-        "length": -1,
+        "nBitLength": 8,
         "_type": "nssai",
         "_name": "requestedNssai"
       },
