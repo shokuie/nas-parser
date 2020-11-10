@@ -1831,7 +1831,8 @@
   },
   {
     "name": "Payload container",
-    "@type": "MESSAGE",
+    "@type": "BIN",
+    "length": -1,
     "_name": "payloadContainer"
   },
   {
@@ -1856,26 +1857,9 @@
     "name": "PDU session identity 2",
     "pdu": [
       {
+        "@type": "INTEGER",
         "name": "PDU session identity 2 value",
         "length": 8,
-        "enum": {
-          "0": "noPduSessionIdentityAssigned",
-          "1": "pduSessionIdentityValue1",
-          "2": "pduSessionIdentityValue2",
-          "3": "pduSessionIdentityValue3",
-          "4": "pduSessionIdentityValue4",
-          "5": "pduSessionIdentityValue5",
-          "6": "pduSessionIdentityValue6",
-          "7": "pduSessionIdentityValue7",
-          "8": "pduSessionIdentityValue8",
-          "9": "pduSessionIdentityValue9",
-          "10": "pduSessionIdentityValue10",
-          "11": "pduSessionIdentityValue11",
-          "12": "pduSessionIdentityValue12",
-          "13": "pduSessionIdentityValue13",
-          "14": "pduSessionIdentityValue14",
-          "15": "pduSessionIdentityValue15"
-        },
         "_name": "pduSessionIdentity2Value"
       }
     ],
