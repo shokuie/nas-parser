@@ -1842,10 +1842,10 @@
         "name": "Request type value",
         "length": 4,
         "enum": {
-          "1": "initialRequest",
-          "2": "existingPduSession",
-          "3": "initialEmergencyRequest",
-          "4": "existingEmergencyPduSession",
+          "1": "initial_request",
+          "2": "existing_pdu_session",
+          "3": "initial_emergency_request",
+          "4": "existing_emergency_pdu_session",
           "5": "reserved"
         },
         "_name": "requestTypeValue"
