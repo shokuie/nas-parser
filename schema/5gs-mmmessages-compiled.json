@@ -577,6 +577,49 @@
     "_name": "deregistrationRequestUeOriginating"
   },
   {
+    "name": "Deregistration accept UE originating",
+    "_name": "deregistrationAcceptUeOriginating"
+  },
+  {
+    "name": "Deregistration request UE terminated",
+    "mandatory": [
+      {
+        "type": "deregistration type",
+        "length": 4,
+        "_type": "deregistrationType",
+        "_name": "deregistrationType"
+      },
+      {
+        "type": "Spare half octet",
+        "length": 4,
+        "_type": "spareHalfOctet",
+        "_name": "spareHalfOctet"
+      }
+    ],
+    "optional": [
+      {
+        "iei": 88,
+        "type": "5GMM cause",
+        "_type": "5gmmCause",
+        "_name": "5gmmCause",
+        "nBitLength": 8
+      },
+      {
+        "iei": 95,
+        "type": "GPRS timer 2",
+        "name": "T3346 value",
+        "_type": "gprsTimer2",
+        "_name": "t3346Value",
+        "nBitLength": 8
+      }
+    ],
+    "_name": "deregistrationRequestUeTerminated"
+  },
+  {
+    "name": "Deregistration accept UE terminated",
+    "_name": "deregistrationAcceptUeTerminated"
+  },
+  {
     "name": "Service request",
     "mandatory": [
       {

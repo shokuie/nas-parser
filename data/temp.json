@@ -1,15 +1,4 @@
 {
-  "securityProtectedNas": {
-    "extendedProtocolDiscriminator": {
-      "extendedProtocolDiscriminatorValue": "5gsMobilityManagementMessages"
-    },
-    "securityHeaderType": {
-      "securityHeaderTypeValue": "integrityProtectedWithNew5gNasSecurityContext"
-    },
-    "sequenceNumber": {
-      "sequenceNumberValue": 0
-    }
-  },
   "plainNas": {
     "extendedProtocolDiscriminator": {
       "extendedProtocolDiscriminatorValue": "5gsMobilityManagementMessages"
@@ -17,27 +6,26 @@
     "securityHeaderType": {
       "securityHeaderTypeValue": "plainNasMessageNotSecurityProtected"
     },
-    "messageName": "securityModeCommand",
-    "selectedNasSecurityAlgorithms": {
-      "typeOfCipheringAlgorithm": "5gea0",
-      "typeOfIntegrityProtectionAlgorithm": "1285gia2"
-    },
-    "ngksi": {
-      "tsc": "nativeSecurityContextForKsiamf"
-    },
-    "replayedUeSecurityCapabilities": {
-      "encryptionAlgorithm": {
-        "type": "Buffer",
-        "data": [
-          128
-        ]
-      },
-      "integrityAlgorithm": {
-        "type": "Buffer",
-        "data": [
-          160
-        ]
-      }
+    "messageName": "securityModeComplete",
+    "nasMessageContainer": {
+      "extendedProtocolDiscriminator": "5gsMobilityManagementMessages",
+      "spare": "0x00",
+      "securityHeaderType": "plain5gsNasMessageNotSecurityProtected"
     }
+  },
+  "securityProtectedNas": {
+    "extendedProtocolDiscriminator": {
+      "extendedProtocolDiscriminatorValue": "5gsMobilityManagementMessages"
+    },
+    "securityHeaderType": {
+      "securityHeaderTypeValue": "integrityProtectedAndCipheredWithNew5gNasSecurityContext"
+    },
+    "messageAuthenticationCode": {
+      "messageAuthenticationCodeValue": "0x00000000"
+    },
+    "sequenceNumber": {
+      "sequenceNumberValue": 0
+    },
+    "ulNasCount": "0x00000000"
   }
 }

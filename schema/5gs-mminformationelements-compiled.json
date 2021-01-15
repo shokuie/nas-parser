@@ -1823,7 +1823,7 @@
       {
         "@type": "BIN",
         "name": "GPRS Timer 2 value",
-        "length": -1,
+        "length": 8,
         "_name": "gprsTimer2Value"
       }
     ],
