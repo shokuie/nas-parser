@@ -124,8 +124,8 @@
     "code": 65,
     "mandatory": [
       {
-        "type": "NAS key set identifier",
         "name": "ngKSI",
+        "type": "NAS key set identifier",
         "length": 4,
         "_type": "nasKeySetIdentifier",
         "_name": "ngksi"
@@ -556,10 +556,11 @@
     "name": "Deregistration request UE originating",
     "mandatory": [
       {
+        "name": "ngKSI",
         "type": "NAS key set identifier",
         "length": 4,
         "_type": "nasKeySetIdentifier",
-        "_name": "nasKeySetIdentifier"
+        "_name": "ngksi"
       },
       {
         "type": "deregistration type",
@@ -629,10 +630,11 @@
         "_name": "serviceType"
       },
       {
+        "name": "ngKSI",
         "type": "NAS key set identifier",
         "length": 4,
         "_type": "nasKeySetIdentifier",
-        "_name": "nasKeySetIdentifier"
+        "_name": "ngksi"
       },
       {
         "type": "5GS mobile identity",

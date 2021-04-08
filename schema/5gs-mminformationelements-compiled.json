@@ -154,9 +154,9 @@
     "pdu": [
       {
         "@type": "INTEGER",
-        "name": "5GS identity type",
+        "name": "Identity detail",
         "length": 4,
-        "_name": "5gsIdentityType"
+        "_name": "identityDetail"
       },
       {
         "name": "odd even indication",
@@ -276,14 +276,8 @@
               {
                 "@type": "INTEGER",
                 "name": "AMF Set ID",
-                "length": 8,
+                "length": 10,
                 "_name": "amfSetId"
-              },
-              {
-                "@type": "INTEGER",
-                "name": "AMF Set ID continued",
-                "length": 2,
-                "_name": "amfSetIdContinued"
               },
               {
                 "@type": "INTEGER",
@@ -308,11 +302,29 @@
             "_name": "imei"
           },
           {
-            "@type": "BIN",
-            "name": "Content",
+            "name": "5G-S-TMSI",
             "tag": 4,
-            "length": -1,
-            "_name": "content"
+            "pdu": [
+              {
+                "@type": "INTEGER",
+                "name": "AMF Set ID",
+                "length": 10,
+                "_name": "amfSetId"
+              },
+              {
+                "@type": "INTEGER",
+                "name": "AMF Pointer",
+                "length": 6,
+                "_name": "amfPointer"
+              },
+              {
+                "@type": "BIN",
+                "name": "5G-TMSI",
+                "length": 32,
+                "_name": "5gtmsi"
+              }
+            ],
+            "_name": "5gstmsi"
           },
           {
             "@type": "BIN",
