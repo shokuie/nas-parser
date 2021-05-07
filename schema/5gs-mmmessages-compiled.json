@@ -638,10 +638,9 @@
       },
       {
         "type": "5GS mobile identity",
-        "name": "5G-S-TMSI",
         "nBitLength": 16,
         "_type": "5gsMobileIdentity",
-        "_name": "5gstmsi"
+        "_name": "5gsMobileIdentity"
       }
     ],
     "optional": [
