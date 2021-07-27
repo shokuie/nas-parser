@@ -213,22 +213,24 @@ function decode5gsMessage(stream, messageName, type) {
       }
 
       if (!optIe) {
-        throw new Error(`Unknown IE received: ${tag.toString(16).toUpperCase()}`);
-      }
-
-      const optIeDef = elements[type].find((elem) => elem._name === optIe._type);
-      let len = 0;
-
-      if (optIe.length && optIe.length !== -1) {
-        len = optIe.length;
-      } else if (optIe.nBitLength) {
-        len = decoders.UINT(stream.readBits(optIe.nBitLength)) * 8;
+        // Unknown IE received: ${tag.toString(16).toUpperCase()};
+        const len = decoders.UINT(stream.readBits(8));
+        stream.readBits(len * 8);
       } else {
-        throw new Error(`Unknown length attribute: ${optIe.type}`);
-      }
+        const optIeDef = elements[type].find((elem) => elem._name === optIe._type);
+        let len = 0;
 
-      const ieStream = stream.slice(len);
-      ieSet[optIe._name] = decodeInfoElement(ieStream, optIeDef);
+        if (optIe.length && optIe.length !== -1) {
+          len = optIe.length;
+        } else if (optIe.nBitLength) {
+          len = decoders.UINT(stream.readBits(optIe.nBitLength)) * 8;
+        } else {
+          throw new Error(`Unknown length attribute: ${optIe.type}`);
+        }
+
+        const ieStream = stream.slice(len);
+        ieSet[optIe._name] = decodeInfoElement(ieStream, optIeDef);
+      }
     }
   }
 
