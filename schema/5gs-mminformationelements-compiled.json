@@ -1029,13 +1029,13 @@
         "_name": "psi15"
       },
       {
-        "name": "PSI714",
+        "name": "PSI14",
         "length": 1,
         "enum": {
           "0": "noUplinkDataPending",
           "1": "uplinkDataPending"
         },
-        "_name": "psi714"
+        "_name": "psi14"
       },
       {
         "name": "PSI13",
@@ -1178,13 +1178,13 @@
         "_name": "psi15"
       },
       {
-        "name": "PSI714",
+        "name": "PSI14",
         "length": 1,
         "enum": {
           "0": "pduSessionInactive",
           "1": "notPduSessionInactive"
         },
-        "_name": "psi714"
+        "_name": "psi14"
       },
       {
         "name": "PSI13",
@@ -1327,13 +1327,13 @@
         "_name": "psi15"
       },
       {
-        "name": "PSI714",
+        "name": "PSI14",
         "length": 1,
         "enum": {
           "0": "notRequested",
           "1": "requested"
         },
-        "_name": "psi714"
+        "_name": "psi14"
       },
       {
         "name": "PSI13",
@@ -1476,13 +1476,13 @@
         "_name": "psi15"
       },
       {
-        "name": "PSI714",
+        "name": "PSI14",
         "length": 1,
         "enum": {
           "0": "reestablishedNotAllowed",
           "1": "reestablishedAllowed"
         },
-        "_name": "psi714"
+        "_name": "psi14"
       },
       {
         "name": "PSI13",

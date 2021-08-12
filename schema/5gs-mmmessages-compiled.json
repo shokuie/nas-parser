@@ -471,7 +471,7 @@
         "iei": 21,
         "type": "NSSAI",
         "name": "Allowed NSSAI",
-        "length": -1,
+        "nBitLength": 8,
         "_type": "nssai",
         "_name": "allowedNssai"
       },
@@ -479,7 +479,7 @@
         "iei": 17,
         "type": "NSSAI",
         "name": "Rejected NSSAI",
-        "length": -1,
+        "nBitLength": 8,
         "_type": "nssai",
         "_name": "rejectedNssai"
       },
@@ -487,7 +487,7 @@
         "iei": 49,
         "type": "NSSAI",
         "name": "Configured NSSAI",
-        "length": -1,
+        "nBitLength": 8,
         "_type": "nssai",
         "_name": "configuredNssai"
       },
@@ -690,6 +690,13 @@
         "type": "PDU session reactivation result",
         "_type": "pduSessionReactivationResult",
         "_name": "pduSessionReactivationResult",
+        "nBitLength": 8
+      },
+      {
+        "iei": 114,
+        "type": "PDU session reactivation result error cause",
+        "_type": "pduSessionReactivationResultErrorCause",
+        "_name": "pduSessionReactivationResultErrorCause",
         "nBitLength": 8
       },
       {
