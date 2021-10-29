@@ -232,40 +232,10 @@
             "tag": 2,
             "pdu": [
               {
-                "@type": "INTEGER",
-                "name": "MCC digit 2",
-                "length": 4,
-                "_name": "mccDigit2"
-              },
-              {
-                "@type": "INTEGER",
-                "name": "MCC digit 1",
-                "length": 4,
-                "_name": "mccDigit1"
-              },
-              {
-                "@type": "INTEGER",
-                "name": "MNC digit 3",
-                "length": 4,
-                "_name": "mncDigit3"
-              },
-              {
-                "@type": "INTEGER",
-                "name": "MCC digit 3",
-                "length": 4,
-                "_name": "mccDigit3"
-              },
-              {
-                "@type": "INTEGER",
-                "name": "MNC digit 2",
-                "length": 4,
-                "_name": "mncDigit2"
-              },
-              {
-                "@type": "INTEGER",
-                "name": "MNC digit 1",
-                "length": 4,
-                "_name": "mncDigit1"
+                "@type": "OCTET STRING",
+                "name": "MCCMNC",
+                "length": 24,
+                "_name": "mccmnc"
               },
               {
                 "@type": "INTEGER",
@@ -343,40 +313,10 @@
     "name": "5GS tracking area identity",
     "pdu": [
       {
-        "@type": "INTEGER",
-        "name": "MCC digit 2",
-        "length": 4,
-        "_name": "mccDigit2"
-      },
-      {
-        "@type": "INTEGER",
-        "name": "MCC digit 1",
-        "length": 4,
-        "_name": "mccDigit1"
-      },
-      {
-        "@type": "INTEGER",
-        "name": "MNC digit 3",
-        "length": 4,
-        "_name": "mncDigit3"
-      },
-      {
-        "@type": "INTEGER",
-        "name": "MCC digit 3",
-        "length": 4,
-        "_name": "mccDigit3"
-      },
-      {
-        "@type": "INTEGER",
-        "name": "MNC digit 2",
-        "length": 4,
-        "_name": "mncDigit2"
-      },
-      {
-        "@type": "INTEGER",
-        "name": "MNC digit 1",
-        "length": 4,
-        "_name": "mncDigit1"
+        "@type": "OCTET STRING",
+        "name": "MCCMNC",
+        "length": 24,
+        "_name": "mccmnc"
       },
       {
         "@type": "INTEGER",
