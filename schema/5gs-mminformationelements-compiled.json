@@ -213,7 +213,7 @@
                 "_name": "protectionSchemeId"
               },
               {
-                "@type": "INTEGER",
+                "@type": "UINT",
                 "name": "Home network public key identifier",
                 "length": 8,
                 "_name": "homeNetworkPublicKeyIdentifier"
@@ -238,19 +238,19 @@
                 "_name": "mccmnc"
               },
               {
-                "@type": "INTEGER",
+                "@type": "UINT",
                 "name": "AMF Region ID",
                 "length": 8,
                 "_name": "amfRegionId"
               },
               {
-                "@type": "INTEGER",
+                "@type": "UINT",
                 "name": "AMF Set ID",
                 "length": 10,
                 "_name": "amfSetId"
               },
               {
-                "@type": "INTEGER",
+                "@type": "UINT",
                 "name": "AMF Pointer",
                 "length": 6,
                 "_name": "amfPointer"
@@ -276,13 +276,13 @@
             "tag": 4,
             "pdu": [
               {
-                "@type": "INTEGER",
+                "@type": "UINT",
                 "name": "AMF Set ID",
                 "length": 10,
                 "_name": "amfSetId"
               },
               {
-                "@type": "INTEGER",
+                "@type": "UINT",
                 "name": "AMF Pointer",
                 "length": 6,
                 "_name": "amfPointer"
