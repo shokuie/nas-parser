@@ -2,6 +2,20 @@ const { aesCmac } = require('node-aes-cmac');
 
 const security = exports;
 
+const IA2_128 = (keyNasInt, count, bearer, dir, message) => {
+  // eslint-disable-next-line no-bitwise
+  const msg = Buffer.concat([count, Buffer.from([((bearer << 3) | ((dir & 0x01) << 2)) & 0xfc, 0, 0, 0]), message]);
+
+  console.log(`msg: ${msg.toString('hex')}`);
+  const ret = aesCmac(keyNasInt, msg, {
+    returnAsBuffer: true,
+  });
+
+  console.log(`AES-CMAC: ${ret.toString('hex')}`);
+
+  return ret.slice(0, 4);
+};
+
 security.calculateMac = (options, message) => {
   const { cipheringAlg, intAlg, count, bearer, dir } = options;
   let { keyNasInt } = options;
@@ -29,13 +43,8 @@ security.calculateMac = (options, message) => {
       mac = Buffer.from('00000000', 'hex');
       break;
 
-    case '1285GIA2': {
-      // eslint-disable-next-line no-bitwise
-      const msg = Buffer.concat([count, Buffer.from([((bearer << 3) | (dir << 2)) & 0xff, 0, 0, 0]), message]);
-      mac = aesCmac(keyNasInt, msg, {
-        returnAsBuffer: true,
-      }).slice(0, 4);
-    }
+    case '1285GIA2':
+      mac = IA2_128(keyNasInt, count, bearer, dir, message);
       break;
 
     default:
