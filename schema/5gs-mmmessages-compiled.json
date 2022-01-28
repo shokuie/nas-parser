@@ -163,9 +163,10 @@
       {
         "iei": 46,
         "type": "UE security capability",
+        "name": "UE security capability",
+        "nBitLength": 8,
         "_type": "ueSecurityCapability",
-        "_name": "ueSecurityCapability",
-        "nBitLength": 8
+        "_name": "ueSecurityCapability"
       },
       {
         "iei": 47,
@@ -374,9 +375,9 @@
       {
         "name": "Replayed UE security capabilities",
         "type": "UE security capability",
+        "nBitLength": 8,
         "_type": "ueSecurityCapability",
-        "_name": "replayedUeSecurityCapabilities",
-        "nBitLength": 8
+        "_name": "replayedUeSecurityCapabilities"
       }
     ],
     "optional": [
