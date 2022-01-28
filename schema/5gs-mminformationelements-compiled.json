@@ -428,15 +428,27 @@
     "pdu": [
       {
         "@type": "BIN",
-        "name": "Encryption Algorithm",
+        "name": "5G Encryption Algorithm",
         "length": 8,
-        "_name": "encryptionAlgorithm"
+        "_name": "5gEncryptionAlgorithm"
       },
       {
         "@type": "BIN",
-        "name": "Integrity Algorithm",
+        "name": "5G Integrity Algorithm",
         "length": 8,
-        "_name": "integrityAlgorithm"
+        "_name": "5gIntegrityAlgorithm"
+      },
+      {
+        "@type": "BIN",
+        "name": "EPS Encryption Algorithm",
+        "length": 8,
+        "_name": "epsEncryptionAlgorithm"
+      },
+      {
+        "@type": "BIN",
+        "name": "EPS Integrity Algorithm",
+        "length": 8,
+        "_name": "epsIntegrityAlgorithm"
       }
     ],
     "_name": "ueSecurityCapability"
