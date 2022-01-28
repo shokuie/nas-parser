@@ -7,6 +7,10 @@ const IA2_128 = (keyNasInt, count, bearer, dir, message) => {
   const msg = Buffer.concat([count, Buffer.from([((bearer << 3) | ((dir & 0x01) << 2)) & 0xfc, 0, 0, 0]), message]);
 
   console.log(`msg: ${msg.toString('hex')}`);
+  console.log(`keyNasInt: ${keyNasInt.toString('hex')}`);
+  console.log(`count: ${count.toString('hex')}`);
+  console.log(`bearer: ${bearer.toString('hex')}`);
+  console.log(`dir: ${dir.toString('hex')}`);
   const ret = aesCmac(keyNasInt, msg, {
     returnAsBuffer: true,
   });
