@@ -153,6 +153,13 @@ function decodeInfoElement(stream, ie) {
   }
 
   if (ie['@type'] === 'CHOICE') {
+    if (len === -1) {
+      const choice = Buffer.from([stream.length() / 8]);
+      const tmpStream = new BitStream(value);
+
+      return decodeChoice(tmpStream, ie, choice);
+    }
+
     return decodeChoice(stream, ie, value);
   }
 
