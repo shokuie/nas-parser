@@ -32,6 +32,10 @@ const encoders = {
   NULL: () => true,
   ENUM: (value, ie) => {
     const choice = parseInt(Object.keys(ie.enum).find((key) => ie.enum[key] === value), 10);
+
+    if (isNaN(choice)) {
+      throw new Error(`INVALID ENUM, ie: ${ie._name}`);
+    }
     return new BitStream(`uint:${ie.length}=${choice}`);
   },
   SPARE: (value, ie) => new BitStream(`uint:${ie.length}=${ie.value}`),

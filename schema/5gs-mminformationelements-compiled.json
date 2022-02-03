@@ -150,6 +150,31 @@
     "_name": "nasKeySetIdentifier"
   },
   {
+    "name": "5GS identity type",
+    "pdu": [
+      {
+        "@type": "SPARE",
+        "name": "Spare",
+        "length": 1,
+        "value": 0,
+        "_name": "spare"
+      },
+      {
+        "name": "Type of identity",
+        "length": 3,
+        "enum": {
+          "1": "suci",
+          "2": "5gguti",
+          "3": "imei",
+          "4": "5gstmsi",
+          "5": "imeisv"
+        },
+        "_name": "typeOfIdentity"
+      }
+    ],
+    "_name": "5gsIdentityType"
+  },
+  {
     "name": "5GS mobile identity",
     "pdu": [
       {
@@ -1834,117 +1859,117 @@
     "pdu": [
       {
         "@type": "CHOICE",
-        "name": "S-NSSAI",
-        "field": {
-          "name": "Length of S-NSSAI contents",
-          "length": 8,
-          "namedValue": {
-            "1": "SST",
-            "2": "SST and mapped HPLMN SST",
-            "4": "SST and SD",
-            "5": "SST, SD and mapped HPLMN SST",
-            "8": "SST, SD, mapped HPLMN SST and mapped HPLMN SD"
-          }
-        },
-        "pdus": [
+        "name": "S-NSSAI value",
+        "elements": [
           {
-            "keys": [
-              1,
-              7
-            ],
+            "name": "SST",
+            "tag": 1,
             "pdu": [
               {
                 "@type": "BIN",
                 "name": "SST",
-                "length": 8
+                "length": 8,
+                "_name": "sst"
               }
-            ]
+            ],
+            "_name": "sst"
           },
           {
-            "keys": [
-              2
-            ],
+            "name": "SST-HPLMNSST",
+            "tag": 2,
             "pdu": [
               {
                 "@type": "BIN",
                 "name": "SST",
-                "length": 8
+                "length": 8,
+                "_name": "sst"
               },
               {
                 "@type": "BIN",
                 "name": "mapped HPLMN SST",
-                "length": 8
+                "length": 8,
+                "_name": "mappedHplmnSst"
               }
-            ]
+            ],
+            "_name": "ssthplmnsst"
           },
           {
-            "keys": [
-              4
-            ],
+            "name": "SST-SD",
+            "tag": 4,
             "pdu": [
               {
                 "@type": "BIN",
                 "name": "SST",
-                "length": 8
+                "length": 8,
+                "_name": "sst"
               },
               {
                 "@type": "BIN",
                 "name": "SD",
-                "length": 24
+                "length": 24,
+                "_name": "sd"
               }
-            ]
+            ],
+            "_name": "sstsd"
           },
           {
-            "keys": [
-              5
-            ],
+            "name": "SST-SD-HPLMNSST",
+            "tag": 5,
             "pdu": [
               {
                 "@type": "BIN",
                 "name": "SST",
-                "length": 8
+                "length": 8,
+                "_name": "sst"
               },
               {
                 "@type": "BIN",
                 "name": "SD",
-                "length": 24
+                "length": 24,
+                "_name": "sd"
               },
               {
                 "@type": "BIN",
                 "name": "mapped HPLMN SST",
-                "length": 8
+                "length": 8,
+                "_name": "mappedHplmnSst"
               }
-            ]
+            ],
+            "_name": "sstsdhplmnsst"
           },
           {
-            "keys": [
-              8
-            ],
+            "name": "SST-SD-HPLMNSST-HPLMNSD",
+            "tag": 8,
             "pdu": [
               {
                 "@type": "BIN",
                 "name": "SST",
-                "length": 8
+                "length": 8,
+                "_name": "sst"
               },
               {
                 "@type": "BIN",
                 "name": "SD",
-                "length": 24
+                "length": 24,
+                "_name": "sd"
               },
               {
                 "@type": "BIN",
                 "name": "mapped HPLMN SST",
-                "length": 8
+                "length": 8,
+                "_name": "mappedHplmnSst"
               },
               {
                 "@type": "BIN",
                 "name": "mapped HPLMN SD",
-                "length": 24
+                "length": 24,
+                "_name": "mappedHplmnSd"
               }
-            ]
+            ],
+            "_name": "sstsdhplmnssthplmnsd"
           }
         ],
-        "_name": "snssai"
+        "_name": "snssaiValue"
       }
     ],
     "_name": "snssai"

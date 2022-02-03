@@ -349,6 +349,26 @@
     "_name": "authenticationFailure"
   },
   {
+    "name": "Identity request",
+    "mandatory": [
+      {
+        "name": "Spare half octet",
+        "type": "Spare half octet",
+        "length": 4,
+        "_type": "spareHalfOctet",
+        "_name": "spareHalfOctet"
+      },
+      {
+        "name": "Identity Type",
+        "type": "5GS Identity Type",
+        "length": 4,
+        "_type": "5gsIdentityType",
+        "_name": "identityType"
+      }
+    ],
+    "_name": "identityRequest"
+  },
+  {
     "name": "Security mode command",
     "mandatory": [
       {
@@ -759,7 +779,7 @@
       {
         "iei": 34,
         "type": "S-NSSAI",
-        "length": -1,
+        "nBitLength": 8,
         "_type": "snssai",
         "_name": "snssai"
       },
