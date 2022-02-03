@@ -545,10 +545,10 @@ function decode(payload, ipc = {}) {
   const message = _decode(payload);
 
   if (message.securityProtectedNas) {
-    switch (message.securityProtectedNas.securityHeaderType.securityHeaderTypeValue) {
+/*    switch (message.securityProtectedNas.securityHeaderType.securityHeaderTypeValue) {
       case 'integrityProtected':
         if (!ipc.intAlg) {
-          throw new Error('No integrity protection detail provided');
+          throw new Error('NO_SECURITY_INFO_PROVIDED');
         }
         break;
 
@@ -557,17 +557,17 @@ function decode(payload, ipc = {}) {
       case 'integrityProtectedAndCipheredWithNew5gNasSecurityContext':
       case 'integrityProtectedAndPartiallyCipheredNasMessage':
         if (!ipc.intAlg) {
-          throw new Error('No integrity protection detail provided');
+          throw new Error('NO_SECURITY_INFO_PROVIDED');
         }
 
         if (!ipc.cipheringAlg) {
-          throw new Error('No ciphering detail provided');
+          throw new Error('NO_SECURITY_INFO_PROVIDED');
         }
 
         break;
 
       default:
-        throw new Error(`securityHeaderType not supported, Type: ${message.securityProtectedNas.securityHeaderType.securityHeaderTypeValue}`);
+        throw new Error('UNSUPPORTED_SECURITY_TYPE');
     }
 
     if (ipc.intAlg) {
@@ -585,12 +585,12 @@ function decode(payload, ipc = {}) {
       const mac = security.calculateMac(ipc, macPayload);
 
       if (mac.compare(message.securityProtectedNas.messageAuthenticationCode.messageAuthenticationCodeValue)) {
-//        throw new Error(`MAC verification failed, recieved ${message.securityProtectedNas.messageAuthenticationCode.messageAuthenticationCodeValue.toString('hex')}, expected: ${mac.toString('hex')}`);
+//        throw new Error('MAC_FAILED);
       }
 
       message.securityProtectedNas.ulNasCount = ipc.count;
     }
-
+*/
     return { ..._decode(message.nasPayload), securityProtectedNas: message.securityProtectedNas };
   }
 
