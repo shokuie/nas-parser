@@ -2,6 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 const { BitStream } = require('./src/bitstream');
 const security = require('./src/security');
+const log = require('./src/log');
 
 const _5GMM = '5gsMobilityManagementMessages';
 const _5GSM = '5gsSessionManagementMessages';
@@ -367,6 +368,7 @@ function encodeInfoElement(payload, ieDef) {
         stream.append(encodeInfoElement(payload && payload[elem._name], elem));
       });
     } catch (Err) {
+      log.error(`Exception in parsing optional parameters, ${Err}`);
       return stream;
     }
 

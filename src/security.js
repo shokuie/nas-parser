@@ -1,4 +1,5 @@
 const { aesCmac } = require('node-aes-cmac');
+const log = require('./log');
 
 const security = exports;
 
@@ -6,16 +7,16 @@ const IA2_128 = (keyNasInt, count, bearer, dir, message) => {
   // eslint-disable-next-line no-bitwise
   const msg = Buffer.concat([count, Buffer.from([((bearer << 3) | ((dir & 0x01) << 2)) & 0xfc, 0, 0, 0]), message]);
 
-  console.log(`msg: ${msg.toString('hex')}`);
-  console.log(`keyNasInt: ${keyNasInt.toString('hex')}`);
-  console.log(`count: ${count.toString('hex')}`);
-  console.log(`bearer: ${bearer.toString(16)}`);
-  console.log(`dir: ${dir.toString(16)}`);
+  log.debug(`msg: ${msg.toString('hex')}`);
+  log.debug(`keyNasInt: ${keyNasInt.toString('hex')}`);
+  log.debug(`count: ${count.toString('hex')}`);
+  log.debug(`bearer: ${bearer.toString(16)}`);
+  log.debug(`dir: ${dir.toString(16)}`);
   const ret = aesCmac(keyNasInt, msg, {
     returnAsBuffer: true,
   });
 
-  console.log(`AES-CMAC: ${ret.toString('hex')}`);
+  log.debug(`AES-CMAC: ${ret.toString('hex')}`);
 
   return ret.slice(0, 4);
 };
