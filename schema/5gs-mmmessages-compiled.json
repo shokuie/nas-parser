@@ -475,10 +475,9 @@
       {
         "iei": 119,
         "type": "5GS mobile identity",
-        "name": "5G-GUTI",
         "nBitLength": 16,
         "_type": "5gsMobileIdentity",
-        "_name": "5gguti"
+        "_name": "5gsMobileIdentity"
       },
       {
         "iei": 84,
