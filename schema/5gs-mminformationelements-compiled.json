@@ -754,10 +754,16 @@
             "length": 8,
             "elements": [
               {
-                "@type": "INTEGER",
                 "tag": 1,
                 "name": "SST",
-                "length": 8,
+                "pdu": [
+                  {
+                    "@type": "INTEGER",
+                    "name": "SST",
+                    "length": 8,
+                    "_name": "sst"
+                  }
+                ],
                 "_name": "sst"
               },
               {
@@ -791,9 +797,9 @@
                   },
                   {
                     "@type": "INTEGER",
-                    "name": "SD Value",
+                    "name": "SD",
                     "length": 24,
-                    "_name": "sdValue"
+                    "_name": "sd"
                   }
                 ],
                 "_name": "sd"
@@ -810,9 +816,9 @@
                   },
                   {
                     "@type": "INTEGER",
-                    "name": "SD Value",
+                    "name": "SD",
                     "length": 24,
-                    "_name": "sdValue"
+                    "_name": "sd"
                   },
                   {
                     "@type": "INTEGER",
@@ -835,9 +841,9 @@
                   },
                   {
                     "@type": "INTEGER",
-                    "name": "SD Value",
+                    "name": "SD",
                     "length": 24,
-                    "_name": "sdValue"
+                    "_name": "sd"
                   },
                   {
                     "@type": "INTEGER",
