@@ -369,6 +369,18 @@
     "_name": "identityRequest"
   },
   {
+    "name": "Identity response",
+    "mandatory": [
+      {
+        "type": "5GS mobile identity",
+        "nBitLength": 16,
+        "_type": "5gsMobileIdentity",
+        "_name": "5gsMobileIdentity"
+      }
+    ],
+    "_name": "identityResponse"
+  },
+  {
     "name": "Security mode command",
     "mandatory": [
       {
