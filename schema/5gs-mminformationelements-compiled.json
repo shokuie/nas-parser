@@ -606,9 +606,9 @@
     "pdu": [
       {
         "@type": "BIN",
-        "name": "ATUS",
+        "name": "AUTS",
         "length": 112,
-        "_name": "atus"
+        "_name": "auts"
       }
     ],
     "_name": "authenticationFailureParameter"
