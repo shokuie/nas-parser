@@ -585,6 +585,44 @@
     "_name": "registrationAccept"
   },
   {
+    "name": "Registration reject",
+    "mandatory": [
+      {
+        "type": "5GMM Cause",
+        "name": "5GMM Cause",
+        "length": 8,
+        "_type": "5gmmCause",
+        "_name": "5gmmCause"
+      }
+    ],
+    "optional": [
+      {
+        "iei": 95,
+        "type": "GPRS timer 2",
+        "name": "T3346 value",
+        "_type": "gprsTimer2",
+        "_name": "t3346Value",
+        "nBitLength": 8
+      },
+      {
+        "iei": 22,
+        "type": "GPRS timer 2",
+        "name": "T3502 value",
+        "_type": "gprsTimer2",
+        "_name": "t3502Value",
+        "nBitLength": 8
+      },
+      {
+        "iei": 120,
+        "type": "EAP message",
+        "_type": "eapMessage",
+        "_name": "eapMessage",
+        "nBitLength": 8
+      }
+    ],
+    "_name": "registrationReject"
+  },
+  {
     "name": "Deregistration request UE originating",
     "mandatory": [
       {
