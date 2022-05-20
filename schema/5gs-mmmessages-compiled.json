@@ -341,7 +341,7 @@
       {
         "iei": 48,
         "type": "Authentication failure parameter",
-        "length": 128,
+        "nBitLength": 8,
         "_type": "authenticationFailureParameter",
         "_name": "authenticationFailureParameter"
       }
