@@ -412,11 +412,49 @@
     "name": "5GMM capability",
     "pdu": [
       {
-        "@type": "SPARE",
-        "name": "Spare",
-        "length": 5,
-        "value": 0,
-        "_name": "spare"
+        "name": "SGC",
+        "length": 1,
+        "enum": {
+          "0": "sgcnotsupported",
+          "1": "sgcsupported"
+        },
+        "_name": "sgc"
+      },
+      {
+        "name": "5G-IPHC-CP CIoT",
+        "length": 1,
+        "enum": {
+          "0": "5giphccpCiotNotSupported",
+          "1": "5giphccpCiotSupported"
+        },
+        "_name": "5giphccpCiot"
+      },
+      {
+        "name": "N3 data transfer",
+        "length": 1,
+        "enum": {
+          "0": "n3DataTransferNotSupported",
+          "1": "n3DataTransferSupported"
+        },
+        "_name": "n3DataTransfer"
+      },
+      {
+        "name": "5G-CP CIoT",
+        "length": 1,
+        "enum": {
+          "0": "5gcpCiotNotSupported",
+          "1": "5gcpCiotSupported"
+        },
+        "_name": "5gcpCiot"
+      },
+      {
+        "name": "RestrictEC",
+        "length": 1,
+        "enum": {
+          "0": "restrictecNotSupported",
+          "1": "restrictecSupported"
+        },
+        "_name": "restrictec"
       },
       {
         "name": "LPP",
@@ -444,6 +482,121 @@
           "1": "supported"
         },
         "_name": "s1Mode"
+      },
+      {
+        "name": "RACS",
+        "length": 1,
+        "enum": {
+          "0": "racsNotSupported",
+          "1": "racsSupported"
+        },
+        "_name": "racs"
+      },
+      {
+        "name": "NSSAA",
+        "length": 1,
+        "enum": {
+          "0": "nssaaNotSupported",
+          "1": "nssaaSupported"
+        },
+        "_name": "nssaa"
+      },
+      {
+        "name": "5G-LCS Notification",
+        "length": 1,
+        "enum": {
+          "0": "5glcsNotificationNotSupported",
+          "1": "5glcsNotificationSupported"
+        },
+        "_name": "5glcsNotification"
+      },
+      {
+        "name": "V2XCNPC5",
+        "length": 1,
+        "enum": {
+          "0": "v2xcnpc5NotSupported",
+          "1": "v2xcnpc5Supported"
+        },
+        "_name": "v2xcnpc5"
+      },
+      {
+        "name": "V2XCEPC5",
+        "length": 1,
+        "enum": {
+          "0": "v2xcepc5NotSupported",
+          "1": "v2xcepc5Supported"
+        },
+        "_name": "v2xcepc5"
+      },
+      {
+        "name": "V2X capability",
+        "length": 1,
+        "enum": {
+          "0": "v2xCapabilityNotSupported",
+          "1": "v2xCapabilitySupported"
+        },
+        "_name": "v2xCapability"
+      },
+      {
+        "name": "5G-UP CIoT Optimization",
+        "length": 1,
+        "enum": {
+          "0": "5gupCiotOptimizationNotSupported",
+          "1": "5gupCiotOptimizationSupported"
+        },
+        "_name": "5gupCiotOptimization"
+      },
+      {
+        "name": "5GSRVCC",
+        "length": 1,
+        "enum": {
+          "0": "5gsrvccNotSupported",
+          "1": "5gsrvccSupported"
+        },
+        "_name": "5gsrvcc"
+      },
+      {
+        "@type": "SPARE",
+        "name": "Spare",
+        "length": 4,
+        "value": 0,
+        "_name": "spare"
+      },
+      {
+        "name": "5G-EHC-CP CIoT",
+        "length": 1,
+        "enum": {
+          "0": "5gehccpCiotNotSupported",
+          "1": "5gehccpCiotSupported"
+        },
+        "_name": "5gehccpCiot"
+      },
+      {
+        "name": "multipleUP",
+        "length": 1,
+        "enum": {
+          "0": "multipleupNotSupported",
+          "1": "multipleupSupported"
+        },
+        "_name": "multipleup"
+      },
+      {
+        "name": "WUSA info reception capability",
+        "length": 1,
+        "enum": {
+          "0": "wusaInfoReceptionCapabilityNotSupported",
+          "1": "wusaInfoReceptionCapabilitySupported"
+        },
+        "_name": "wusaInfoReceptionCapability"
+      },
+      {
+        "name": "CAG",
+        "length": 1,
+        "enum": {
+          "0": "cagNotSupported",
+          "1": "cagSupported"
+        },
+        "_name": "cag"
       }
     ],
     "_name": "5gmmCapability"
@@ -1784,6 +1937,105 @@
           "1": "imsVoiceOverPsSessionSupportedOver3gppAccess"
         },
         "_name": "imsvops3gpp"
+      },
+      {
+        "name": "5G-UP CIoT",
+        "length": 1,
+        "enum": {
+          "0": "5gupCiotNotSupported",
+          "1": "5gupCiotSupported"
+        },
+        "_name": "5gupCiot"
+      },
+      {
+        "name": "5G-HC-CP CIoT",
+        "length": 1,
+        "enum": {
+          "0": "5ghccpCiotNotSupported",
+          "1": "5ghccpCiotSupported"
+        },
+        "_name": "5ghccpCiot"
+      },
+      {
+        "name": "N3 data transfer",
+        "length": 1,
+        "enum": {
+          "0": "n3DataTransferNotSupported",
+          "1": "n3DataTransferSupported"
+        },
+        "_name": "n3DataTransfer"
+      },
+      {
+        "name": "5G-CP CIoT",
+        "length": 1,
+        "enum": {
+          "0": "5gcpCiotNotSupported",
+          "1": "5gcpCiotSupported"
+        },
+        "_name": "5gcpCiot"
+      },
+      {
+        "name": "RestrictEC",
+        "length": 2,
+        "enum": {
+          "0": "zero",
+          "1": "one",
+          "2": "two",
+          "3": "three"
+        },
+        "_name": "restrictec"
+      },
+      {
+        "name": "MCSI",
+        "length": 1,
+        "enum": {
+          "0": "accessIdentity2NotValid",
+          "1": "accessIdentity2Valid"
+        },
+        "_name": "mcsi"
+      },
+      {
+        "name": "EMCN3",
+        "length": 1,
+        "enum": {
+          "0": "emergencyServicesNotSupportedOverNon3gppAccess",
+          "1": "emergencyServicesSupportedOverNon3gppAccess"
+        },
+        "_name": "emcn3"
+      },
+      {
+        "@type": "SPARE",
+        "name": "Spare",
+        "length": 5,
+        "value": 0,
+        "_name": "spare"
+      },
+      {
+        "name": "5G-EHC-CP CIoT",
+        "length": 1,
+        "enum": {
+          "0": "5gehccpCiotNotSupported",
+          "1": "5gehccpCiotSupported"
+        },
+        "_name": "5gehccpCiot"
+      },
+      {
+        "name": "ATS-IND",
+        "length": 1,
+        "enum": {
+          "0": "atsssNotSupported",
+          "1": "atsssSupported"
+        },
+        "_name": "atsind"
+      },
+      {
+        "name": "5G-LCS",
+        "length": 1,
+        "enum": {
+          "0": "5glcsNotSupported",
+          "1": "5glcsSupported"
+        },
+        "_name": "5glcs"
       }
     ],
     "_name": "5gsNetworkFeatureSupport"
